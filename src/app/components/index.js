@@ -1,6 +1,5 @@
 export { default as Breadcrumb } from './Breadcrumb';
 export { default as ChatAvatar } from './ChatAvatar';
-export { default as Chatbox } from './Chatbox';
 export { default as ChatHead } from './ChatHead';
 export { default as ConfirmationDialog } from './ConfirmationDialog';
 export { default as FacebookIcon } from './icons/FacebookIcon';

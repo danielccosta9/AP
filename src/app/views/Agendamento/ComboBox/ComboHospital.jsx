@@ -10,25 +10,26 @@ const AutoComplete = styled(Autocomplete)(() => ({
 }));
 
 const AutocompleteCombo = () => {
-  const [value, setValue] = useState(null);
-  const baseURL = "https://api-node-paciente-postgres.herokuapp.com/hospital";
+  const [values, setValues] = useState({});
+  const baseURLHospital = "https://api-node-paciente-postgres.herokuapp.com/hospital";
 
-  console.log(value);
+  console.log(values);
 
   useEffect(() => {
-    Axios.get(baseURL)
-      .then(json => setValue(json.data))
+    Axios.get(baseURLHospital)
+      .then(json => setValues(json.data))
   }, [])
 
-  const suggestions = value;
+  const suggestions = values;
 
   return (
     <Fragment>
       <AutoComplete
         options={suggestions}
         getOptionLabel={(option) => option.hospital_nome}
+        onChange={(event, value) => setValues({ ...values, hospital_id: value })}
         renderInput={(params) => (
-          <TextField {...params} label="Combo box" variant="outlined" fullWidth />
+          <TextField {...params} label="Hospital" variant="outlined" fullWidth />
         )}
       />
     </Fragment>

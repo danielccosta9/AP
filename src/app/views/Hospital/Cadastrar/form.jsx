@@ -14,8 +14,16 @@ import { Span } from "app/components/Typography";
 
 const TextField = styled(TextValidator)(() => ({
   width: "100%",
-  marginBottom: "16px",
+  marginBottom: "15px",
 }));
+
+const button = {
+  padding: '10px 20px',
+  margin: '10px',
+  marginTop: '50px',
+  width: '200px',
+  borderRadius: '15px',
+};
 
 const SimpleForm = () => {
   const baseURL = "https://api-node-paciente-postgres.herokuapp.com/hospital";
@@ -71,7 +79,7 @@ const SimpleForm = () => {
             />
           </Grid>
         </Grid>
-        <Button color="primary" variant="contained" type="submit">
+        <Button color="primary" variant="contained" type="submit" style={button}>
           <Icon>save</Icon>
           <Span sx={{ pl: 1, textTransform: "capitalize" }}>Salvar</Span>
         </Button>

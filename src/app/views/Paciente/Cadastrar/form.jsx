@@ -20,8 +20,16 @@ import { Span } from "app/components/Typography";
 
 const TextField = styled(TextValidator)(() => ({
   width: "100%",
-  marginBottom: "16px",
+  marginBottom: "15px",
 }));
+
+const button = {
+  padding: '10px 20px',
+  margin: '10px',
+  marginTop: '50px',
+  width: '200px',
+  borderRadius: '15px',
+};
 
 const InputCpf = React.forwardRef(function InputCpf(props, ref) {
   const { onChange, ...other } = props;
@@ -179,6 +187,7 @@ const SimpleForm = () => {
                   onChange={handleChangeMask}
                   id="formatted-text-mask-input"
                   inputComponent={InputCpf}
+                  required={true}
                 />
               </FormControl>
             </Box>
@@ -201,6 +210,7 @@ const SimpleForm = () => {
                   onChange={handleChangeMask}
                   id="formatted-text-mask-input"
                   inputComponent={InputDate}
+                  required={true}
                 />
               </FormControl>
             </Box>
@@ -222,13 +232,14 @@ const SimpleForm = () => {
                   onChange={handleChangeMask}
                   id="formatted-text-mask-input"
                   inputComponent={InputPhone}
+                  required={true}
                 />
               </FormControl>
             </Box>
 
           </Grid>
         </Grid>
-        <Button color="primary" variant="contained" type="submit">
+        <Button color="primary" variant="contained" type="submit" style={button}>
           <Icon>save</Icon>
           <Span sx={{ pl: 1, textTransform: "capitalize" }}>Salvar</Span>
         </Button>

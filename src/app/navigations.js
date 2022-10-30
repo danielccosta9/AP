@@ -8,7 +8,6 @@ export const navigations = [
     children: [
       { name: 'Agendar', iconText: 'A', path: '/agendamento/cadastrar-agendamento' },
       { name: 'Listar Agendamentos', iconText: 'L', path: '/agendamento/listar-agendamento' },
-      { name: 'Combo Box', iconText: 'C', path: '/agendamento/combo-box' },
     ],
   },
   { label: 'Paciente', type: 'label' },

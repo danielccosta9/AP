@@ -1,8 +1,11 @@
 import Axios from 'axios';
 import { useState, useEffect } from "react";
+import Pesquisar from './Pesquisar';
 
 import {
     Box,
+    IconButton,
+    Icon,
     styled,
     Table,
     TableBody,
@@ -33,6 +36,16 @@ const PaginationTable = () => {
             .then(json => setPaciente(json.data))
     }, [])
 
+    const handleDelete = (id) => {
+        Axios.delete(`${baseURL}/${id}`)
+            .then(() => {
+                const newAgendados = paciente.filter((paciente) => paciente.id !== id);
+                setPaciente(newAgendados);
+            })
+        alert("Viagem realizada com sucesso!");
+        window.location.reload();
+    };
+
     const quantidadePaciente = paciente;
 
 
@@ -47,10 +60,10 @@ const PaginationTable = () => {
 
     return (
         <Box width="100%" overflow="auto">
+            < Pesquisar />
             <StyledTable>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="left">Nº</TableCell>
                         <TableCell align="left">Nome</TableCell>
                         <TableCell align="center">CPF</TableCell>
                         <TableCell align="center">Nascimento</TableCell>
@@ -63,12 +76,18 @@ const PaginationTable = () => {
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((subscriber, index) => (
                             <TableRow key={index} hover>
-                                <TableCell align="left">{subscriber.paciente_id}</TableCell>
                                 <TableCell align="left">{subscriber.paciente_nome}</TableCell>
                                 <TableCell align="center">{subscriber.paciente_cpf}</TableCell>
                                 <TableCell align="center">{subscriber.paciente_nascimento}</TableCell>
                                 <TableCell align="center">{subscriber.paciente_telefone}</TableCell>
                                 <TableCell align="right">{subscriber.paciente_residencia}</TableCell>
+                                {/* <TableCell align="right">
+                                    <IconButton
+                                        onClick={handleDelete.bind(this, subscriber.paciente_id)}
+                                    >
+                                        <Icon color="success">done</Icon>
+                                    </IconButton>
+                                </TableCell> */}
                             </TableRow>
                         ))}
                 </TableBody>

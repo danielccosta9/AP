@@ -1,37 +1,56 @@
-import * as React from 'react';
-import { useState } from "react";
+import React from 'react';
+import { useEffect, useState } from "react";
 import Axios from "axios";
 
 import {
   Button,
   Grid,
   Icon,
-  styled,
 } from "@mui/material";
-import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+import { ValidatorForm } from "react-material-ui-form-validator";
 import { Span } from "app/components/Typography";
 
+import ComboPaciente from "./ComboPaciente";
+import ComboHospital from "./ComboHospital";
+import ComoboCarro from './ComboCarro';
 
-const TextField = styled(TextValidator)(() => ({
-  width: "100%",
+
+import { TextField } from '@mui/material';
+
+const section = {
+  width: "300px",
+  height: "40px",
   marginBottom: "16px",
-}));
+};
 
-const SimpleForm = () => {
-  const baseURL = "https://api-node-paciente-postgres.herokuapp.com/hospital";
+const button = {
+  padding: '10px 20px',
+  margin: '10px',
+  width: '200px',
+  borderRadius: '15px',
+};
+
+const AgendamentoForm = () => {
+  const baseURLAgenda = "https://api-node-paciente-postgres.herokuapp.com/agenda";
   const [values, setValues] = useState({});
 
+  console.log(values);
+
+  useEffect(() => {
+    Axios.get(baseURLAgenda)
+      .then(json => setValues(json.data))
+  }, [])
   console.log(values);
 
   function submit(event) {
     event.preventDefault();
     console.log(values);
-    Axios.post(baseURL, values)
+    Axios.post(baseURLAgenda, values)
       .then(() => {
         setValues({});
       })
-    alert('Cadastrado com sucesso!');
-    //window.location.reload(false);
+    alert('Agendado com sucesso!');
+    window.location.reload(false);
   }
 
 
@@ -41,43 +60,108 @@ const SimpleForm = () => {
     setValues(values => ({ ...values, [name]: value }))
   }
 
+
   return (
     <div>
       <ValidatorForm onSubmit={(event) => submit(event)}>
-        <Grid container spacing={6}>
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+        <Grid container spacing={3}>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
 
-            <TextField
-              type="text"
-              name="nome"
-              id="standard-basic"
-              value={values.nome || ""}
-              onChange={handleChange}
-              errorMessages={["Este campo é obrigatório"]}
-              label="Nome do Hospital"
-              validators={["required", "minStringLength: 3", "maxStringLength: 100"]}
-            />
-          </Grid>
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
-            <TextField
-              type="text"
-              name="estado"
-              id="standard-basic"
-              value={values.estado || ""}
-              onChange={handleChange}
-              errorMessages={["Este campo é obrigatório"]}
-              label="Estado do Hospital"
-              validators={["required", "minStringLength: 3", "maxStringLength: 100"]}
-            />
+            <Grid container spacing={3}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
+
+                <Span>Nome do Paciente</Span>
+                <ComboPaciente
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
+                <Span>Nome do Hospital</Span>
+                <ComboHospital
+                  onChange={handleChange}
+                />
+
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
+                <Span>Carro Baixo</Span>
+                <ComoboCarro
+                  onChange={handleChange}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={3}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
+                <Span>Data da Consulta</Span>
+                <TextField
+                  fullWidth
+                  name="data"
+                  onChange={handleChange}
+                  type="date"
+                  value={values.data}
+                  variant="outlined"
+                  style={section}
+                  required={true}
+                />
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
+                <Span>Hora de Saída</Span>
+                <TextField
+                  fullWidth
+                  name="saida"
+                  onChange={handleChange}
+                  type="time"
+                  value={values.saida}
+                  variant="outlined"
+                  style={section}
+                  required={true}
+                />
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
+                <Span>Hora Marcada</Span>
+                <TextField
+                  fullWidth
+                  name="marcado"
+                  onChange={handleChange}
+                  type="time"
+                  value={values.marcado}
+                  variant="outlined"
+                  style={section}
+                  required={true}
+                />
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
+                <Span
+                  name="status"
+                  onChange={handleChange}
+                  type="number"
+                  variant="outlined"
+                  value={values.status || 'AGENDADO'}
+                  valueDefault={values.status = 'AGENDADO'}
+                  disabled={true}
+                  required={true}>
+                </Span>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-        <Button color="primary" variant="contained" type="submit">
-          <Icon>save</Icon>
-          <Span sx={{ pl: 1, textTransform: "capitalize" }}>Salvar</Span>
-        </Button>
+        <Grid container spacing={3}>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Button
+              color="primary"
+              endIcon={<Icon>save</Icon>}
+              size="large"
+              type="submit"
+              variant="contained"
+              style={button}
+            >
+              Agendar
+            </Button>
+          </Grid>
+        </Grid>
       </ValidatorForm>
-    </div >
+    </div>
   );
 };
 
-export default SimpleForm;
+export default AgendamentoForm;

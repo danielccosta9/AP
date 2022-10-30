@@ -21,8 +21,6 @@ const AppExpansionPanel = Loadable(lazy(() => import('./expansion-panel/AppExpan
 const AppFormCadAgendamento = Loadable(lazy(() => import('../Agendamento/Cadastrar/index')));
 // Caminho Listar Agendamento
 const AppListAgendamento = Loadable(lazy(() => import('../Agendamento/Listar/index')));
-// Caminho Combo Box
-const AppComboBox = Loadable(lazy(() => import('../Agendamento/ComboBox/AppAutoComplete')));
 
 // Paciente
 // Caminho Cadastrar Pacientes
@@ -102,10 +100,6 @@ const materialRoutes = [
   {
     path: '/agendamento/listar-agendamento',
     element: <AppListAgendamento />,
-  },
-  {
-    path: '/agendamento/combo-box',
-    element: <AppComboBox />,
   },
 
   // Paciente

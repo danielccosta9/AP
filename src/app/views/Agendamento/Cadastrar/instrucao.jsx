@@ -13,7 +13,7 @@ function getSteps() {
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return `Preencha todos os campos: Nome do Hospital e Estado do Hospital.`;
+      return `Preencha todos os campos: Nome do Paciente, Nome do Hospital, Tipo do Carro, Data da Consulta, Hora de Saída e Hora Marcada.`;
 
     case 1:
       return `Verifique se todos os campos foram preenchidos corretamento antes de Salvar.`;
@@ -50,7 +50,7 @@ export default function StepperForm() {
       <Box mt={4}>
         {activeStep === steps.length ? (
           <Box>
-            <Typography>Tutorail concluído!</Typography>
+            <Typography>Tutorial concluído!</Typography>
 
             <Button sx={{ mt: 2 }} variant="contained" color="secondary" onClick={handleReset}>
               Ver de novo

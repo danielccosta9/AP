@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 
 import {
     Box,
+    IconButton,
+    Icon,
     styled,
     Table,
     TableBody,
@@ -25,15 +27,25 @@ const StyledTable = styled(Table)(() => ({
 const PaginationTable = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [paciente, setPaciente] = useState([]);
+    const [agendados, setAgendados] = useState([]);
     const baseURL = "https://api-node-paciente-postgres.herokuapp.com/agenda";
 
     useEffect(() => {
         Axios.get(baseURL)
-            .then(json => setPaciente(json.data))
-    }, [])
+            .then(json => setAgendados(json.data))
+    }, []);
 
-    const quantidadePaciente = paciente;
+    const handleDelete = (id) => {
+        Axios.delete(`${baseURL}/${id}`)
+            .then(() => {
+                const newAgendados = agendados.filter((agendado) => agendado.id !== id);
+                setAgendados(newAgendados);
+            })
+        alert("Viagem realizada com sucesso!");
+        window.location.reload();
+    };
+
+    const agenda = agendados;
 
 
     const handleChangePage = (_, newPage) => {
@@ -57,33 +69,44 @@ const PaginationTable = () => {
                         <TableCell align="left">Saída</TableCell>
                         <TableCell align="left">Marcado</TableCell>
                         <TableCell align="left">Nome do Hospital</TableCell>
-                        <TableCell align="left">Carro</TableCell>
+                        <TableCell align="center">Carro</TableCell>
+                        <TableCell align="right">Viajou</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {paciente
+                    {agenda
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map((agenda, index) => (
-                            <TableRow key={index} hover>
-                                <TableCell align="left">{new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(agenda.agenda_data).getTime() + 24 * 60 * 60 * 1000)}</TableCell>
-                                <TableCell align="left">{agenda.paciente_nome}</TableCell>
-                                <TableCell align="left">{agenda.paciente_cpf}</TableCell>
-                                <TableCell align="left">{agenda.paciente_telefone}</TableCell>
-                                <TableCell align="left">{agenda.agenda_saida}</TableCell>
-                                <TableCell align="left">{agenda.agenda_marcado}</TableCell>
-                                <TableCell align="left">{agenda.hospital_nome}</TableCell>
-                                <TableCell align="left">{agenda.agenda_carro}</TableCell>
-                            </TableRow>
-                        ))}
+                        .map((agenda) => {
+                            if (agenda.agenda_status === 'AGENDADO') {
+                                return (
+                                    <TableRow key={agenda.id} hover>
+                                        <TableCell align="left">{new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(agenda.agenda_data).getTime() + 24 * 60 * 60 * 1000)}</TableCell>
+                                        <TableCell align="left">{agenda.paciente_nome}</TableCell>
+                                        <TableCell align="left">{agenda.paciente_cpf}</TableCell>
+                                        <TableCell align="left">{agenda.paciente_telefone}</TableCell>
+                                        <TableCell align="left">{agenda.agenda_saida}</TableCell>
+                                        <TableCell align="left">{agenda.agenda_marcado}</TableCell>
+                                        <TableCell align="left">{agenda.hospital_nome}</TableCell>
+                                        <TableCell align="center">{agenda.agenda_carro}</TableCell>
+                                        <TableCell align="right">
+                                            <IconButton
+                                                onClick={handleDelete.bind(this, agenda.agenda_id)}
+                                            >
+                                                <Icon color="success">done</Icon>
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            }
+                        })}
                 </TableBody>
             </StyledTable>
-
             <TablePagination
                 sx={{ px: 2 }}
                 page={page}
                 component="div"
                 rowsPerPage={rowsPerPage}
-                count={quantidadePaciente.length}
+                count={agenda.length}
                 onPageChange={handleChangePage}
                 rowsPerPageOptions={[5, 10, 25, 50]}
                 onRowsPerPageChange={handleChangeRowsPerPage}

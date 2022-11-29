@@ -15,10 +15,10 @@ const AppTable = () => {
     return (
         <Container>
             <Box className="breadcrumb">
-                <Breadcrumb routeSegments={[{ name: "Hospital", path: "/hospital/listar-hospital" }, { name: "Listar" }]} />
+                <Breadcrumb routeSegments={[{ name: "Médico", path: "/administrador/listar-medico" }, { name: "Listar" }]} />
             </Box>
 
-            <SimpleCard title="Lista de Hospital">
+            <SimpleCard title="Lista De Médicos Cadastrados">
                 <PaginationTable />
             </SimpleCard>
         </Container>

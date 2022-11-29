@@ -1,11 +1,10 @@
 import { LoadingButton } from '@mui/lab';
-import { Card, Checkbox, Grid, TextField } from '@mui/material';
-import { Box, styled, useTheme } from '@mui/system';
-import { Paragraph } from 'app/components/Typography';
+import { Card, Grid, TextField } from '@mui/material';
+import { Box, styled } from '@mui/system';
 import useAuth from 'app/hooks/useAuth';
 import { Formik } from 'formik';
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
@@ -53,7 +52,6 @@ const validationSchema = Yup.object().shape({
 });
 
 const JwtLogin = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -117,28 +115,6 @@ const JwtLogin = () => {
                       error={Boolean(errors.password && touched.password)}
                       sx={{ mb: 1.5 }}
                     />
-
-                    <FlexBox justifyContent="space-between">
-                      <FlexBox gap={1}>
-                        <Checkbox
-                          size="small"
-                          name="remember"
-                          onChange={handleChange}
-                          checked={values.remember}
-                          sx={{ padding: 0 }}
-                        />
-
-                        <Paragraph>Lembrar de mim</Paragraph>
-                      </FlexBox>
-
-                      <NavLink
-                        to="/session/forgot-password"
-                        style={{ color: theme.palette.primary.main }}
-                      >
-                        Esqueceu a senha?
-                      </NavLink>
-                    </FlexBox>
-
                     <LoadingButton
                       type="submit"
                       color="primary"
@@ -148,16 +124,6 @@ const JwtLogin = () => {
                     >
                       Entrar
                     </LoadingButton>
-
-                    <Paragraph>
-                      Não tem uma conta?
-                      <NavLink
-                        to="/session/signup"
-                        style={{ color: theme.palette.primary.main, marginLeft: 5 }}
-                      >
-                        Registrar
-                      </NavLink>
-                    </Paragraph>
                   </form>
                 )}
               </Formik>

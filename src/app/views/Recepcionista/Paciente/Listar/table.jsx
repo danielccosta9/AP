@@ -1,11 +1,8 @@
 import Axios from 'axios';
 import { useState, useEffect } from "react";
-import Pesquisar from './Pesquisar';
 
 import {
     Box,
-    IconButton,
-    Icon,
     styled,
     Table,
     TableBody,
@@ -29,22 +26,14 @@ const PaginationTable = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [paciente, setPaciente] = useState([]);
-    const baseURL = "https://api-node-paciente-postgres.herokuapp.com/paciente";
+    const baseURL = "http://10.0.2.199:8080/pacientes";
+
+    console.log(baseURL);
 
     useEffect(() => {
         Axios.get(baseURL)
             .then(json => setPaciente(json.data))
     }, [])
-
-    const handleDelete = (id) => {
-        Axios.delete(`${baseURL}/${id}`)
-            .then(() => {
-                const newAgendados = paciente.filter((paciente) => paciente.id !== id);
-                setPaciente(newAgendados);
-            })
-        alert("Viagem realizada com sucesso!");
-        window.location.reload();
-    };
 
     const quantidadePaciente = paciente;
 
@@ -60,15 +49,17 @@ const PaginationTable = () => {
 
     return (
         <Box width="100%" overflow="auto">
-            < Pesquisar />
             <StyledTable>
                 <TableHead>
                     <TableRow>
                         <TableCell align="left">Nome</TableCell>
-                        <TableCell align="center">CPF</TableCell>
                         <TableCell align="center">Nascimento</TableCell>
+                        <TableCell align="center">Responsavel</TableCell>
                         <TableCell align="center">Telefone</TableCell>
-                        <TableCell align="right">Residência</TableCell>
+                        <TableCell align="center">CPF</TableCell>
+                        <TableCell align="center">SUS</TableCell>
+                        <TableCell align="center">Sexo</TableCell>
+                        <TableCell align="center">Residencia</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -76,18 +67,15 @@ const PaginationTable = () => {
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((subscriber, index) => (
                             <TableRow key={index} hover>
-                                <TableCell align="left">{subscriber.paciente_nome}</TableCell>
-                                <TableCell align="center">{subscriber.paciente_cpf}</TableCell>
-                                <TableCell align="center">{subscriber.paciente_nascimento}</TableCell>
-                                <TableCell align="center">{subscriber.paciente_telefone}</TableCell>
-                                <TableCell align="right">{subscriber.paciente_residencia}</TableCell>
-                                {/* <TableCell align="right">
-                                    <IconButton
-                                        onClick={handleDelete.bind(this, subscriber.paciente_id)}
-                                    >
-                                        <Icon color="success">done</Icon>
-                                    </IconButton>
-                                </TableCell> */}
+                                <TableCell align="left">{subscriber.nome}</TableCell>
+                                <TableCell align="left">{new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(subscriber.data_nascimento).getTime() + 24 * 60 * 60 * 1000)}</TableCell>
+
+                                <TableCell align="center">{subscriber.responsavel}</TableCell>
+                                <TableCell align="center">{subscriber.telefone}</TableCell>
+                                <TableCell align="center">{subscriber.cpf}</TableCell>
+                                <TableCell align="center">{subscriber.numero_sus}</TableCell>
+                                <TableCell align="center">{subscriber.sexo}</TableCell>
+                                <TableCell align="center">{subscriber.residencia}</TableCell>
                             </TableRow>
                         ))}
                 </TableBody>

@@ -17,11 +17,11 @@ const AppForm = () => {
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Agendamento", path: "/agendamento/cadastrar-agendamento" }, { name: "Cadastrar" }]} />
+        <Breadcrumb routeSegments={[{ name: "Médico", path: "/administrador/cadastrar-medico" }, { name: "Cadastrar" }]} />
       </Box>
 
       <Stack spacing={3}>
-        <SimpleCard title="Cadastrar Agendamento">
+        <SimpleCard title="Cadastrar Médico">
           <SimpleForm />
         </SimpleCard>
 

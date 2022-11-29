@@ -13,12 +13,15 @@ const userList = [
     email: 'daniel@suc.com',
     age: 25,
   },
+  {
+    id: 2,
+    role: 'SA',
+    name: 'Joyce Pinheiro',
+    username: 'joyce_pinheiro',
+    email: 'joyce@suc.com',
+    age: 25,
+  }
 ];
-
-// FOLLOWING CODES ARE MOCK SERVER IMPLEMENTATION
-// YOU NEED TO BUILD YOUR OWN SERVER
-// IF YOU NEED HELP ABOUT SERVER SIDE IMPLEMENTATION
-// CONTACT US AT support@ui-lib.com
 
 Mock.onPost('/api/auth/login').reply(async (config) => {
   try {

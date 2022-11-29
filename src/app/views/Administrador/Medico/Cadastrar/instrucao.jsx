@@ -7,23 +7,23 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 
 function getSteps() {
-  return ["Primeiro passo para cadastrar um hospital", "Segundo passo para cadastrar um hospital", "Salvar"];
+  return ["Primeiro passo para cadastrar um paciente", "Segundo passo para cadastrar um paciente", "Salvar"];
 }
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return `Preencha todos os campos: Nome do Paciente, Nome do Hospital, Tipo do Carro, Data da Consulta, Hora de Saída e Hora Marcada.`;
+      return `Preencha todos os campos: Nome do Médico, Endereço, Especialidade, CPF, CRM, Data de Nascimento e Telefone.`;
 
     case 1:
       return `Verifique se todos os campos foram preenchidos corretamento antes de Salvar.`;
 
     case 2:
-      return `Depois de verificar todos os campos com os dados do hospital, clica no botão Salvar para cadastrar o hospital.
-      Depois de Salvar, o hospital estará cadastrado no sistema e poderá ser consultado na tela de Listas de Hospital.`;
+      return `Depois de verificar todos os campos com os dados do paciente, clica no botão Salvar para cadastrar o paciente.
+      Depois de Salvar, o paciente estará cadastrado no sistema e poderá ser consultado na tela de Listas de Pacientes.`;
 
     default:
-      return "Default";
+      return `Default`;
   }
 }
 
@@ -50,7 +50,7 @@ export default function StepperForm() {
       <Box mt={4}>
         {activeStep === steps.length ? (
           <Box>
-            <Typography>Tutorial concluído!</Typography>
+            <Typography>Tutorail concluído!</Typography>
 
             <Button sx={{ mt: 2 }} variant="contained" color="secondary" onClick={handleReset}>
               Ver de novo

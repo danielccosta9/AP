@@ -1,31 +1,82 @@
 export const navigations = [
   { name: 'Dashboard', path: '/dashboard/default', icon: 'dashboard' },
+  { label: 'PAGES', type: 'label' },
+  {
+    name: 'Session/Auth',
+    icon: 'security',
+    children: [
+      { name: 'Sign in', iconText: 'SI', path: '/session/signin' },
+      { name: 'Sign up', iconText: 'SU', path: '/session/signup' },
+      { name: 'Forgot Password', iconText: 'FP', path: '/session/forgot-password' },
+      { name: 'Error', iconText: '404', path: '/session/404' },
+    ],
+  },
+  { label: 'Administrador', type: 'label' },
+  {
+    name: 'Administrador',
+    icon: 'assignment_ind',
+    children: [
+      {
+        name: 'Enfermeiro',
+        icon: 'local_hospital',
+        children: [
+          { name: 'Cadastrar', iconText: 'A', path: '/administrador/cadastrar-enfermeiro' },
+          { name: 'Listar', iconText: 'B', path: '/administrador/listar-enfermeiro' },
+        ],
+      },
 
-  { label: 'Agendamento', type: 'label' },
-  {
-    name: 'Agendamento',
-    icon: 'event_available',
-    children: [
-      { name: 'Agendar', iconText: 'A', path: '/agendamento/cadastrar-agendamento' },
-      { name: 'Listar Agendamentos', iconText: 'L', path: '/agendamento/listar-agendamento' },
+      {
+        name: 'Médico',
+        icon: 'business_center',
+        children: [
+          { name: 'Cadastrar', iconText: 'A', path: '/administrador/cadastrar-medico' },
+          { name: 'Listar', iconText: 'B', path: '/administrador/listar-medico' },
+        ],
+      },
+      {
+        name: 'Recepcionista',
+        icon: 'person',
+        children: [
+          { name: 'Cadastrar', iconText: 'A', path: '/administrador/cadastrar-recepcionista' },
+          { name: 'Listar', iconText: 'B', path: '/administrador/listar-recepcionista' },
+        ],
+      },
     ],
   },
-  { label: 'Paciente', type: 'label' },
+
+  { label: 'Enfermeiro', type: 'label' },
   {
-    name: 'Paciente',
-    icon: 'accessible',
-    children: [
-      { name: 'Cadastrar', iconText: 'C', path: '/paciente/cadastrar-paciente' },
-      { name: 'Listar', iconText: 'L', path: '/paciente/listar-paciente' },
-    ],
-  },
-  { label: 'Hospital', type: 'label' },
-  {
-    name: 'Hospital',
+    name: 'Enfermeiro',
     icon: 'local_hospital',
     children: [
-      { name: 'Cadastrar', iconText: 'A', path: '/hospital/cadastrar-hospital' },
-      { name: 'Listar', iconText: 'B', path: '/hospital/listar-hospital' },
+      { name: 'Cadastrar', iconText: 'A', path: '/paciente/cadastrar' },
+      { name: 'Listar', iconText: 'B', path: '/paciente/listar' },
+    ],
+  },
+
+  { label: 'Médico', type: 'label' },
+  {
+    name: 'Médico',
+    icon: 'business_center',
+    children: [
+      { name: 'Cadastrar', iconText: 'A', path: '/paciente/cadastrar' },
+      { name: 'Listar', iconText: 'B', path: '/paciente/listar' },
+    ],
+  },
+
+  { label: 'Recepcionista', type: 'label' },
+  {
+    name: 'Recepcionista',
+    icon: 'person',
+    children: [
+      {
+        name: 'Paciente',
+        icon: 'accessible',
+        children: [
+          { name: 'Cadastrar', iconText: 'C', path: '/recepcionista/cadastrar-paciente' },
+          { name: 'Listar', iconText: 'L', path: '/recepcionista/listar-paciente' },
+        ],
+      },
     ],
   },
   { label: 'Components', type: 'label' },

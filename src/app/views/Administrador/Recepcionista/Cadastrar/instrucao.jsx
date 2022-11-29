@@ -50,7 +50,7 @@ export default function StepperForm() {
       <Box mt={4}>
         {activeStep === steps.length ? (
           <Box>
-            <Typography>Tutorial concluído!</Typography>
+            <Typography>Tutorail concluído!</Typography>
 
             <Button sx={{ mt: 2 }} variant="contained" color="secondary" onClick={handleReset}>
               Ver de novo

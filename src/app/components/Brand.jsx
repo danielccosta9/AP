@@ -26,7 +26,7 @@ const Brand = ({ children }) => {
       <Box display="flex" alignItems="center">
         <MatxLogo />
         <StyledSpan mode={mode} className="sidenavHoverShow">
-          Agendar Pacientes
+          Pront Atendimento
         </StyledSpan>
       </Box>
 

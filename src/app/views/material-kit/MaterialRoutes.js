@@ -16,23 +16,26 @@ const AppSnackbar = Loadable(lazy(() => import('./snackbar/AppSnackbar')));
 const AppAutoComplete = Loadable(lazy(() => import('./auto-complete/AppAutoComplete')));
 const AppExpansionPanel = Loadable(lazy(() => import('./expansion-panel/AppExpansionPanel')));
 
-// Agendamento
-// Caminho Cadastrar Agendamento
-const AppFormCadAgendamento = Loadable(lazy(() => import('../Agendamento/Cadastrar/index')));
-// Caminho Listar Agendamento
-const AppListAgendamento = Loadable(lazy(() => import('../Agendamento/Listar/index')));
+// Administrador
+// Cadastrar Enfermeiro ADM
+const AppFormCadEfermeira = Loadable(lazy(() => import('../Administrador/Enfermeiro/Cadastrar/index')));
+// Listar PacienEnfermeirote ADM
+const AppListEfermeira = Loadable(lazy(() => import('../Administrador/Enfermeiro/Listar/index')));
+// Cadastrar Medico ADM
+const AppFormCadMedico = Loadable(lazy(() => import('../Administrador/Medico/Cadastrar/index')));
+// Listar Medico ADM
+const AppListMedico = Loadable(lazy(() => import('../Administrador/Medico/Listar/index')));
+// Cadastrar Recepcionista ADM
+const AppFormCadRecepcionista = Loadable(lazy(() => import('../Administrador/Recepcionista/Cadastrar/index')));
+// Listar Recepcionista ADM
+const AppListRecepcionista = Loadable(lazy(() => import('../Administrador/Recepcionista/Listar/index')));
 
-// Paciente
+
+// Recepcionista
 // Caminho Cadastrar Pacientes
-const AppFormCadPaciente = Loadable(lazy(() => import('../Paciente/Cadastrar/index')));
+const AppFormCadPaciente = Loadable(lazy(() => import('../Recepcionista/Paciente/Cadastrar/index')));
 // Caminho Listar Pacientes
-const AppListPaciente = Loadable(lazy(() => import('../Paciente/Listar/index')));
-
-// Hospital
-// Caminho Cadastrar Hospital
-const AppFormCadHospital = Loadable(lazy(() => import('../Hospital/Cadastrar/index')));
-// Caminho Listar Hospital
-const AppListHospital = Loadable(lazy(() => import('../Hospital/Listar/index')));
+const AppListPaciente = Loadable(lazy(() => import('../Recepcionista/Paciente/Listar/index')));
 
 const materialRoutes = [
   {
@@ -92,35 +95,42 @@ const materialRoutes = [
     element: <AppSnackbar />,
   },
 
-  // Agendamento
+  // Administrador
   {
-    path: '/agendamento/cadastrar-agendamento',
-    element: <AppFormCadAgendamento />,
+    path: '/administrador/cadastrar-enfermeiro',
+    element: <AppFormCadEfermeira />,
   },
   {
-    path: '/agendamento/listar-agendamento',
-    element: <AppListAgendamento />,
+    path: '/administrador/listar-enfermeiro',
+    element: <AppListEfermeira />,
+  },
+  {
+    path: '/administrador/cadastrar-medico',
+    element: <AppFormCadMedico />,
+  },
+  {
+    path: '/administrador/listar-medico',
+    element: <AppListMedico />,
+  },
+  {
+    path: '/administrador/cadastrar-recepcionista',
+    element: <AppFormCadRecepcionista />,
+  },
+  {
+    path: '/administrador/listar-recepcionista',
+    element: <AppListRecepcionista />,
   },
 
-  // Paciente
+
+  // Recepcionista
   {
-    path: '/paciente/cadastrar-paciente',
+    path: '/recepcionista/cadastrar-paciente',
     element: <AppFormCadPaciente />
   },
   {
-    path: '/paciente/listar-paciente',
+    path: '/recepcionista/listar-paciente',
     element: <AppListPaciente />
-  },
-
-  // Hospital
-  {
-    path: '/hospital/cadastrar-hospital',
-    element: <AppFormCadHospital />
-  },
-  {
-    path: '/hospital/listar-hospital',
-    element: <AppListHospital />
-  },
+  }
 ];
 
 export default materialRoutes;

@@ -4,6 +4,7 @@ import { IMaskInput } from 'react-imask';
 import Axios from "axios";
 
 import {
+  Autocomplete,
   Button,
   Grid,
   Icon,
@@ -25,6 +26,16 @@ const button = {
   width: '200px',
   borderRadius: '15px',
 };
+
+const AutoComplete = styled(Autocomplete)(() => ({
+  marginBottom: '16px',
+}));
+
+const suggestions = [
+  { label: 'MASCULINO' },
+  { label: 'FEIMININO' },
+  { label: 'OUTROS' },
+];
 
 const InputCpf = React.forwardRef(function InputCpf(props, ref) {
   const { onChange, ...other } = props;
@@ -174,16 +185,13 @@ const SimpleForm = () => {
               label="Residencia"
               validators={["required", "minStringLength: 3", "maxStringLength: 100"]}
             />
-            <TextField
-              required
-              type="text"
-              name="sexo"
-              label="Sexo"
-              id="standard-basic"
-              value={values.sexo || ""}
-              onChange={handleChange}
-              errorMessages={"Escolha entre as opções: MASCULINO|FEMININO| OUTROS"}
-              vvalidators={["required", "minStringLength: 5"]}
+            <AutoComplete
+              options={suggestions}
+              getOptionLabel={(option) => option.label}
+              renderInput={(params) => (
+                <TextField {...params} label="Sexo" variant="outlined" required />
+              )}
+              onChange={(event, value) => setValues(values => ({ ...values, sexo: value.label }))}
             />
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>

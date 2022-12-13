@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 
 import {
+  Autocomplete,
   Button,
   Grid,
   Icon,
+  styled,
 } from "@mui/material";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import { Span } from "app/components/Typography";
@@ -29,6 +31,19 @@ const button = {
   width: '200px',
   borderRadius: '15px',
 };
+
+const AutoComplete = styled(Autocomplete)(() => ({
+  width: '300px',
+  marginTop: '40px',
+  marginBottom: '16px',
+}));
+
+const suggestionsCarro = [
+  { label: 'NÃO' },
+  { label: 'SIM' },
+  { label: 'DUCA' },
+  { label: 'NEIDE' },
+];
 
 const AgendamentoForm = () => {
   const baseURLAgenda = "https://api-node-paciente-postgres.herokuapp.com/agenda";
@@ -66,10 +81,8 @@ const AgendamentoForm = () => {
       <ValidatorForm onSubmit={(event) => submit(event)}>
         <Grid container spacing={3}>
           <Grid item lg={12} md={12} sm={12} xs={12}>
-
             <Grid container spacing={3}>
               <Grid item lg={4} md={4} sm={12} xs={12}>
-
                 <Span>Nome do Paciente</Span>
                 <ComboPaciente
                   onChange={handleChange}
@@ -82,12 +95,20 @@ const AgendamentoForm = () => {
                 />
 
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12}>
+              {/* <Grid item lg={4} md={4} sm={12} xs={12}>
                 <Span>Carro Baixo</Span>
                 <ComoboCarro
                   onChange={handleChange}
                 />
-              </Grid>
+              </Grid> */}
+              <AutoComplete
+                options={suggestionsCarro}
+                getOptionLabel={(option) => option.label}
+                renderInput={(params) => (
+                  <TextField {...params} label="Carro Baixo" variant="outlined" required />
+                )}
+                onChange={(event, value) => setValues(values => ({ ...values, carro: value.label }))}
+              />
             </Grid>
 
             <Grid container spacing={3}>

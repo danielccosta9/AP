@@ -14,7 +14,6 @@ import { Span } from "app/components/Typography";
 
 import ComboPaciente from "./ComboPaciente";
 import ComboHospital from "./ComboHospital";
-import ComoboCarro from './ComboCarro';
 
 
 import { TextField } from '@mui/material';

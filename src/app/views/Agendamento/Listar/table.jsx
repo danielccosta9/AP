@@ -76,6 +76,7 @@ const PaginationTable = () => {
                 <TableBody>
                     {agenda
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        // eslint-disable-next-line array-callback-return
                         .map((agenda) => {
                             if (agenda.agenda_status === 'AGENDADO') {
                                 return (

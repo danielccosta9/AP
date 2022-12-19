@@ -1,11 +1,8 @@
 import Axios from 'axios';
-import { useState, useEffect } from "react";
-import Pesquisar from './Pesquisar';
+import { useState, useEffect, useMemo } from "react";
 
 import {
     Box,
-    IconButton,
-    Icon,
     styled,
     Table,
     TableBody,
@@ -13,6 +10,9 @@ import {
     TableHead,
     TablePagination,
     TableRow,
+    Input,
+    // IconButton,
+    // Icon,
 } from "@mui/material";
 
 const StyledTable = styled(Table)(() => ({
@@ -26,25 +26,27 @@ const StyledTable = styled(Table)(() => ({
 }));
 
 const PaginationTable = () => {
+    const baseURL = "https://makeup-api.herokuapp.com/api/v1/products.json";
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [paciente, setPaciente] = useState([]);
-    const baseURL = "https://api-node-paciente-postgres.herokuapp.com/paciente";
+    const [busca, setBusca] = useState('');
+
 
     useEffect(() => {
         Axios.get(baseURL)
             .then(json => setPaciente(json.data))
     }, [])
 
-    const handleDelete = (id) => {
-        Axios.delete(`${baseURL}/${id}`)
-            .then(() => {
-                const newAgendados = paciente.filter((paciente) => paciente.id !== id);
-                setPaciente(newAgendados);
-            })
-        alert("Viagem realizada com sucesso!");
-        window.location.reload();
-    };
+    // const handleDelete = (id) => {
+    //     Axios.delete(`${baseURL}/${id}`)
+    //         .then(() => {
+    //             const newAgendados = paciente.filter((paciente) => paciente.id !== id);
+    //             setPaciente(newAgendados);
+    //         })
+    //     alert("Viagem realizada com sucesso!");
+    //     window.location.reload();
+    // };
 
     const quantidadePaciente = paciente;
 
@@ -58,9 +60,25 @@ const PaginationTable = () => {
         setPage(0);
     };
 
+    const filteredPaciente = useMemo(() => {
+        return paciente.filter((paciente) => {
+            return paciente.name.toLowerCase().includes(busca.toLowerCase());
+        });
+    }, [busca, paciente]);
+
     return (
         <Box width="100%" overflow="auto">
-            < Pesquisar />
+            <form>
+                <Input
+                    type="text"
+                    placeholder="Pesquisar por nome"
+                    value={busca}
+                    sx={{ width: 300, marginBottom: '20px', marginTop: '20px' }}
+                    onChange={(e) => setBusca(e.target.value)}
+                    icon="search"
+                />
+            </form>
+
             <StyledTable>
                 <TableHead>
                     <TableRow>
@@ -72,11 +90,11 @@ const PaginationTable = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {paciente
+                    {filteredPaciente
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((subscriber, index) => (
                             <TableRow key={index} hover>
-                                <TableCell align="left">{subscriber.paciente_nome}</TableCell>
+                                <TableCell align="left">{subscriber.name}</TableCell>
                                 <TableCell align="center">{subscriber.paciente_cpf}</TableCell>
                                 <TableCell align="center">{subscriber.paciente_nascimento}</TableCell>
                                 <TableCell align="center">{subscriber.paciente_telefone}</TableCell>

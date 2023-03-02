@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import {
     Box,
@@ -10,6 +10,9 @@ import {
     TableHead,
     TablePagination,
     TableRow,
+    Input,
+    // IconButton,
+    // Icon,
 } from "@mui/material";
 
 const StyledTable = styled(Table)(() => ({
@@ -23,15 +26,27 @@ const StyledTable = styled(Table)(() => ({
 }));
 
 const PaginationTable = () => {
+    const baseURLHospital = "https://api-paciente.cyclic.app/hospital";
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [paciente, setPaciente] = useState([]);
-    const baseURL = "https://api-node-paciente-postgres.herokuapp.com/hospital";
+    const [busca, setBusca] = useState('');
+
 
     useEffect(() => {
-        Axios.get(baseURL)
+        Axios.get(baseURLHospital)
             .then(json => setPaciente(json.data))
     }, [])
+
+    // const handleDelete = (id) => {
+    //     Axios.delete(`${baseURLHospital}/${id}`)
+    //         .then(() => {
+    //             const deleteHospital = paciente.filter((paciente) => paciente.paciente_id !== id);
+    //             setPaciente(deleteHospital);
+    //         })
+    //     alert("Hospital excluído com sucesso!");
+    //     window.location.reload();
+    // };
 
     const quantidadePaciente = paciente;
 
@@ -45,22 +60,47 @@ const PaginationTable = () => {
         setPage(0);
     };
 
+    const filteredPaciente = useMemo(() => {
+        return paciente.filter((paciente) => {
+            return paciente.hospital_nome.toLowerCase().includes(busca.toLowerCase());
+        });
+    }, [busca, paciente]);
+
     return (
         <Box width="100%" overflow="auto">
+            <form>
+                <Input
+                    type="text"
+                    placeholder="Pesquisar por nome"
+                    value={busca}
+                    sx={{ width: 300, marginBottom: '20px', marginTop: '20px' }}
+                    onChange={(e) => setBusca(e.target.value)}
+                    icon="search"
+                />
+            </form>
+
             <StyledTable>
                 <TableHead>
                     <TableRow>
                         <TableCell align="left">Nome</TableCell>
-                        <TableCell align="left">Estado</TableCell>
+                        <TableCell align="center">Estado</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {paciente
+                    {filteredPaciente
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map((subscriber, index) => (
+                        .map((hospital, index) => (
                             <TableRow key={index} hover>
-                                <TableCell align="left">{subscriber.hospital_nome}</TableCell>
-                                <TableCell align="left">{subscriber.hospital_estado}</TableCell>
+                                <TableCell align="left">{hospital.hospital_nome}</TableCell>
+                                <TableCell align="center">{hospital.hospital_estado}</TableCell>
+                                {/* <TableCell align="right">
+                                    <IconButton
+                                        onClick={() => handleDelete(hospital.hospital_id)}
+                                        sx={{ color: "error.main" }}
+                                    >
+                                        <Icon>delete</Icon>
+                                    </IconButton>
+                                </TableCell> */}
                             </TableRow>
                         ))}
                 </TableBody>

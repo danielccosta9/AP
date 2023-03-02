@@ -26,7 +26,7 @@ const StyledTable = styled(Table)(() => ({
 }));
 
 const PaginationTable = () => {
-    const baseURL = "https://makeup-api.herokuapp.com/api/v1/products.json";
+    const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [paciente, setPaciente] = useState([]);
@@ -34,7 +34,7 @@ const PaginationTable = () => {
 
 
     useEffect(() => {
-        Axios.get(baseURL)
+        Axios.get(baseURLPaciente)
             .then(json => setPaciente(json.data))
     }, [])
 
@@ -62,7 +62,7 @@ const PaginationTable = () => {
 
     const filteredPaciente = useMemo(() => {
         return paciente.filter((paciente) => {
-            return paciente.name.toLowerCase().includes(busca.toLowerCase());
+            return paciente.paciente_nome.toLowerCase().includes(busca.toLowerCase());
         });
     }, [busca, paciente]);
 
@@ -86,22 +86,22 @@ const PaginationTable = () => {
                         <TableCell align="center">CPF</TableCell>
                         <TableCell align="center">Nascimento</TableCell>
                         <TableCell align="center">Telefone</TableCell>
-                        <TableCell align="right">Residência</TableCell>
+                        <TableCell align="left">Residência</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {filteredPaciente
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map((subscriber, index) => (
+                        .map((paciente, index) => (
                             <TableRow key={index} hover>
-                                <TableCell align="left">{subscriber.name}</TableCell>
-                                <TableCell align="center">{subscriber.paciente_cpf}</TableCell>
-                                <TableCell align="center">{subscriber.paciente_nascimento}</TableCell>
-                                <TableCell align="center">{subscriber.paciente_telefone}</TableCell>
-                                <TableCell align="right">{subscriber.paciente_residencia}</TableCell>
+                                <TableCell align="left">{paciente.paciente_nome}</TableCell>
+                                <TableCell align="center">{paciente.paciente_cpf}</TableCell>
+                                <TableCell align="center">{paciente.paciente_nascimento}</TableCell>
+                                <TableCell align="center">{paciente.paciente_telefone}</TableCell>
+                                <TableCell align="left">{paciente.paciente_residencia}</TableCell>
                                 {/* <TableCell align="right">
                                     <IconButton
-                                        onClick={handleDelete.bind(this, subscriber.paciente_id)}
+                                        onClick={handleDelete.bind(this, paciente.paciente_id)}
                                     >
                                         <Icon color="success">done</Icon>
                                     </IconButton>

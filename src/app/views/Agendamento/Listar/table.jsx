@@ -1,10 +1,11 @@
 import Axios from 'axios';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import {
     Box,
     IconButton,
     Icon,
+    Input,
     styled,
     Table,
     TableBody,
@@ -25,10 +26,11 @@ const StyledTable = styled(Table)(() => ({
 }));
 
 const PaginationTable = () => {
+    const baseURL = "https://api-paciente.cyclic.app/agenda";
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [agendados, setAgendados] = useState([]);
-    const baseURL = "https://api-node-paciente-postgres.herokuapp.com/agenda";
+    const [busca, setBusca] = useState('');
 
     useEffect(() => {
         Axios.get(baseURL)
@@ -57,8 +59,24 @@ const PaginationTable = () => {
         setPage(0);
     };
 
+    const filteredPaciente = useMemo(() => {
+        return agenda.filter((agenda) => {
+            return agenda.paciente_nome.toLowerCase().includes(busca.toLowerCase());
+        });
+    }, [busca, agenda]);
+
     return (
         <Box width="100%" overflow="auto">
+            <form>
+                <Input
+                    type="text"
+                    placeholder="Pesquisar por nome"
+                    value={busca}
+                    sx={{ width: 300, marginBottom: '20px', marginTop: '20px' }}
+                    onChange={(e) => setBusca(e.target.value)}
+                    icon="search"
+                />
+            </form>
             <StyledTable>
                 <TableHead>
                     <TableRow>
@@ -68,13 +86,13 @@ const PaginationTable = () => {
                         <TableCell align="left">Telefone</TableCell>
                         <TableCell align="left">Saída</TableCell>
                         <TableCell align="left">Marcado</TableCell>
-                        <TableCell align="left">Nome do Hospital</TableCell>
+                        <TableCell align="center">Nome do Hospital</TableCell>
                         <TableCell align="center">Carro</TableCell>
                         <TableCell align="right">Viajou</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {agenda
+                    {filteredPaciente
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         // eslint-disable-next-line array-callback-return
                         .map((agenda) => {

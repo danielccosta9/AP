@@ -39,10 +39,10 @@ const Heading = styled('h6')(({ theme }) => ({
 const StatCards = () => {
 
   const [paciente, setPaciente] = useState([]);
-  const baseURL = "https://api-node-paciente-postgres.herokuapp.com/paciente";
+  const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
 
   useEffect(() => {
-    Axios.get(baseURL)
+    Axios.get(baseURLPaciente)
       .then(json => setPaciente(json.data))
   }, [])
 

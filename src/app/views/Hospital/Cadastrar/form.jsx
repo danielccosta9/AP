@@ -3,14 +3,18 @@ import { useState } from "react";
 import Axios from "axios";
 
 import {
+  Autocomplete,
   Button,
   Grid,
   Icon,
   styled,
 } from "@mui/material";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import { Span } from "app/components/Typography";
+import { Span } from "../../../components/Typography";
 
+const AutoComplete = styled(Autocomplete)(() => ({
+  marginBottom: '16px',
+}));
 
 const TextField = styled(TextValidator)(() => ({
   width: "100%",
@@ -25,8 +29,15 @@ const button = {
   borderRadius: '15px',
 };
 
+const suggestionsEstado = [
+  { label: 'JOAO PESSOA - PB' },
+  { label: 'CAMPINA GRANDE - PB' },
+  { label: 'RECIFE - PE' },
+  { label: 'NATAL - RN' },
+];
+
 const SimpleForm = () => {
-  const baseURL = "https://api-node-paciente-postgres.herokuapp.com/hospital";
+  const baseURLHospital = "https://api-paciente.cyclic.app/hospital";
   const [values, setValues] = useState({});
 
   console.log(values);
@@ -34,7 +45,7 @@ const SimpleForm = () => {
   function submit(event) {
     event.preventDefault();
     console.log(values);
-    Axios.post(baseURL, values)
+    Axios.post(baseURLHospital, values)
       .then(() => {
         setValues({});
       })
@@ -67,15 +78,13 @@ const SimpleForm = () => {
             />
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
-            <TextField
-              type="text"
-              name="estado"
-              id="standard-basic"
-              value={values.estado || ""}
-              onChange={handleChange}
-              errorMessages={["Este campo é obrigatório"]}
-              label="Estado do Hospital"
-              validators={["required", "minStringLength: 3", "maxStringLength: 100"]}
+            <AutoComplete
+              options={suggestionsEstado}
+              getOptionLabel={(option) => option.label}
+              renderInput={(params) => (
+                <TextField {...params} label="Local" variant="outlined" required />
+              )}
+              onChange={(event, value) => setValues(values => ({ ...values, estado: value.label }))}
             />
           </Grid>
         </Grid>

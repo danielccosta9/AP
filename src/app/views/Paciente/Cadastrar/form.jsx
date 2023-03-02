@@ -12,7 +12,7 @@ import {
   styled,
 } from "@mui/material";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import { Span } from "app/components/Typography";
+import { Span } from "../../../components/Typography";
 
 
 const TextField = styled(TextValidator)(() => ({
@@ -32,10 +32,45 @@ const AutoComplete = styled(Autocomplete)(() => ({
   marginBottom: '16px',
 }));
 
-const suggestions = [
-  { label: 'MASCULINO' },
-  { label: 'FEIMININO' },
-  { label: 'OUTROS' },
+const suggestionsHouse = [
+  { label: 'CENTRO' },
+  { label: 'ZONA RUAL' },
+  { label: 'BAIRRO - BELA VISTA' },
+  { label: 'BAIRRO - CASTELO BRANCO' },
+  { label: 'BAIRRO - SAO SEBASTIAO' },
+  { label: 'BAIRRO - SANTO AMARO' },
+  { label: 'BAIRRO - SANTO AMARO' },
+  { label: 'BAIRRO - JOSÉ PESSOA DE BRITO' },
+  { label: 'BAIRRO - EMÍLIA BORGES ' },
+  { label: 'SÍTIO - BONITA' },
+  { label: 'SÍTIO - BARRA DA ESPINGARDA' },
+  { label: 'SÍTIO - CANAFISTULA' },
+  { label: 'SÍTIO - CANAFISTINHA' },
+  { label: 'SÍTIO - CACHOEIRA' },
+  { label: 'SÍTIO - CIPOAL' },
+  { label: 'SÍTIO - CHA DO MASCATE' },
+  { label: 'SÍTIO - CUITE MENINO DEUS' },
+  { label: 'SÍTIO - JACINTO' },
+  { label: 'SÍTIO - LAGOA DAS VELHAS' },
+  { label: 'SÍTIO - LAGOA DO FELIX' },
+  { label: 'SÍTIO - MATA DE ESTREITO' },
+  { label: 'SÍTIO - MASCATE' },
+  { label: 'SÍTIO - MARMARAU' },
+  { label: 'SÍTIO - MEREREBA' },
+  { label: 'SÍTIO - MERCADOR DE BAIXO' },
+  { label: 'SÍTIO - MERCADOR DE CIMA' },
+  { label: 'SÍTIO - OLHO D`ÀGUA' },
+  { label: 'SÍTIO - GENIPAPO DE TAUMATA' },
+  { label: 'SÍTIO - GRAVATA DE PIABAS' },
+  { label: 'SÍTIO - GUARIBAS' },
+  { label: 'SÍTIO - PACHECO ' },
+  { label: 'SÍTIO - PITOMBAS' },
+  { label: 'SÍTIO - PIABAS' },
+  { label: 'SÍTIO - RIACHO GRNADE' },
+  { label: 'SÍTIO - RIACHO DE BAIXO' },
+  { label: 'SÍTIO - SANTA LUCIA' },
+  { label: 'SÍTIO - SAO VICENTE' },
+  { label: 'SÍTIO - VIOLETA' },
 ];
 
 const InputCpf = React.forwardRef(function InputCpf(props, ref) {
@@ -102,7 +137,7 @@ InputPhone.propTypes = {
 };
 
 const SimpleForm = () => {
-  const baseURL = "https://api-node-paciente-postgres.herokuapp.com/paciente";
+  const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
   const [values, setValues] = useState({});
 
   console.log(values);
@@ -110,7 +145,7 @@ const SimpleForm = () => {
   function submit(event) {
     event.preventDefault();
     console.log(values);
-    Axios.post(baseURL, values)
+    Axios.post(baseURLPaciente, values)
       .then(() => {
         setValues({});
       })
@@ -155,14 +190,13 @@ const SimpleForm = () => {
             />
 
             <AutoComplete
-              options={suggestions}
+              options={suggestionsHouse}
               getOptionLabel={(option) => option.label}
               renderInput={(params) => (
-                <TextField {...params} label="Sexo" variant="outlined" required />
+                <TextField {...params} label="Residencia" variant="outlined" required />
               )}
-              onChange={(event, value) => setValues(values => ({ ...values, sexo: value.label }))}
+              onChange={(event, value) => setValues(values => ({ ...values, residencia: value.label }))}
             />
-
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <TextField

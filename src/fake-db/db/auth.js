@@ -10,8 +10,18 @@ const userList = [
     role: 'SA',
     name: 'Daniel Cordeiro',
     username: 'daniel_cordeiro',
-    email: 'daniel@suc.com',
-    age: 25,
+    email: 'daniel@pma.com',
+    password: '123456',
+    age: 23,
+  },
+  {
+    id: 2,
+    role: 'SA',
+    name: 'Ninha',
+    username: 'maria_da_luz',
+    email: 'ninha2023@pma.com',
+    password: 'Ninha2023',
+    age: 43,
   },
 ];
 

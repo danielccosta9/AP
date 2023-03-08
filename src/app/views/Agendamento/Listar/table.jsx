@@ -44,7 +44,6 @@ const PaginationTable = () => {
                 setAgendados(newAgendados);
             })
         alert("Viagem realizada com sucesso!");
-        window.location.reload();
     };
 
     const agenda = agendados;

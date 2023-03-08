@@ -81,7 +81,6 @@ const SimpleForm = () => {
         setValues({});
       })
     alert('Agendado com sucesso!');
-    window.location.reload(false);
   }
 
 

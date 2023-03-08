@@ -50,7 +50,6 @@ const SimpleForm = () => {
         setValues({});
       })
     alert('Cadastrado com sucesso!');
-    //window.location.reload(false);
   }
 
 

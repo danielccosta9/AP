@@ -39,21 +39,28 @@ const Heading = styled('h6')(({ theme }) => ({
 const StatCards = () => {
 
   const [paciente, setPaciente] = useState([]);
+  const [agendados, setAgendados] = useState([]);
   const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
+  const baseURLAgendados = "https://api-paciente.cyclic.app/agenda";
+
 
   useEffect(() => {
     Axios.get(baseURLPaciente)
       .then(json => setPaciente(json.data))
   }, [])
 
+  useEffect(() => {
+    Axios.get(baseURLAgendados)
+      .then(json => setAgendados(json.data))
+  }, [])
+
   const quantidadePaciente = paciente;
+  const quantidadeAgendados = agendados;
 
 
   const cardList = [
-    { name: 'Nº de Pacientes Cadastrados', amount: quantidadePaciente.length, icon: 'folder_shared' },
-    { name: 'This week Sales', amount: '$80,500', icon: 'attach_money' },
-    { name: 'Inventory Status', amount: '8.5% Stock Surplus', icon: 'store' },
-    { name: 'Orders to deliver', amount: '305 Orders', icon: 'shopping_cart' },
+    { name: 'Nº de Pacientes Cadastrados', amount: quantidadePaciente.length + ' - Pacientes', icon: 'folder_shared' },
+    { name: 'Nº Restante de Pacientes Agendados', amount: quantidadeAgendados.length + ' - Pacientes', icon: 'folder_shared' },
   ];
 
   return (

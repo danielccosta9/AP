@@ -13,6 +13,13 @@ const AppFormCadPaciente = Loadable(lazy(() => import('../Paciente/Cadastrar/ind
 // Caminho Listar Pacientes
 const AppListPaciente = Loadable(lazy(() => import('../Paciente/Listar/index')));
 
+// Funad
+// Caminho Cadastrar Funad
+const AppFormCadFunad = Loadable(lazy(() => import('../Funad/Cadastrar/index')));
+
+// Caminho Listart Funad
+const AppListFunad = Loadable(lazy(() => import('../Funad/Listar/index')));
+
 // Hospital
 // Caminho Cadastrar Hospital
 const AppFormCadHospital = Loadable(lazy(() => import('../Hospital/Cadastrar/index')));
@@ -38,6 +45,16 @@ const materialRoutes = [
   {
     path: '/paciente/listar-paciente',
     element: <AppListPaciente />
+  },
+
+  // Funad
+  {
+    path: '/funad/cadastrar-paciente-funad',
+    element: <AppFormCadFunad />
+  },
+  {
+    path: '/funad/listar-paciente-funad',
+    element: <AppListFunad />
   },
 
   // Hospital

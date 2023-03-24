@@ -40,16 +40,14 @@ const SimpleForm = () => {
   const baseURLHospital = "https://api-paciente.cyclic.app/hospital";
   const [values, setValues] = useState({});
 
-  console.log(values);
-
   function submit(event) {
     event.preventDefault();
-    console.log(values);
     Axios.post(baseURLHospital, values)
       .then(() => {
         setValues({});
       })
     alert('Cadastrado com sucesso!');
+    setValues({});
   }
 
 

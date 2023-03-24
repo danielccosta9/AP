@@ -71,16 +71,24 @@ const SimpleForm = () => {
       setPaciente(response.data);
     });
   }, []);
-  console.log(values);
 
   function submit(event) {
     event.preventDefault();
-    console.log(values);
     Axios.post(baseURLAgenda, values)
       .then(() => {
-        setValues({});
+        setValues(
+          {
+            paciente_id: '',
+            hospital_id: '',
+            data: '',
+            saida: '',
+            marcado: '',
+            carro: '',
+          }
+        );
       })
     alert('Agendado com sucesso!');
+
   }
 
 
@@ -91,6 +99,7 @@ const SimpleForm = () => {
   }
 
 
+
   return (
     <div>
       <ValidatorForm onSubmit={(event) => submit(event)}>
@@ -99,6 +108,7 @@ const SimpleForm = () => {
             <Grid container spacing={3}>
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 <AutoComplete
+                  name="paciente_id"
                   options={sugestionPaciente}
                   getOptionLabel={(option) => option.label}
                   renderInput={(params) => (
@@ -109,6 +119,7 @@ const SimpleForm = () => {
               </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 <AutoComplete
+                  name="hospital_id"
                   options={sugestionHospital}
                   getOptionLabel={(option) => option.label}
                   renderInput={(params) => (
@@ -119,6 +130,7 @@ const SimpleForm = () => {
               </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 <AutoComplete
+                  name="carro"
                   options={suggestionsCarro}
                   getOptionLabel={(option) => option.label}
                   renderInput={(params) => (

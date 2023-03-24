@@ -19,6 +19,15 @@ export const navigations = [
       { name: 'Listar', iconText: 'L', path: '/paciente/listar-paciente' },
     ],
   },
+  { label: 'FUNAD', type: 'label' },
+  {
+    name: 'FUNAD',
+    icon: 'accessible',
+    children: [
+      { name: 'Cadastrar', iconText: 'C', path: '/funad/cadastrar-paciente-funad' },
+      { name: 'Listar', iconText: 'L', path: '/funad/listar-paciente-funad' },
+    ],
+  },
   { label: 'Hospital', type: 'label' },
   {
     name: 'Hospital',

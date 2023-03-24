@@ -140,9 +140,10 @@ const SimpleForm = () => {
   const baseURLPaciente = "https://api-paciente.cyclic.app/funad";
   const [values, setValues] = useState({});
 
+  console.log(values);
+
   function submit(event) {
     event.preventDefault();
-    console.log(values);
     Axios.post(baseURLPaciente, values)
       .then(() => {
         setValues({});
@@ -150,11 +151,13 @@ const SimpleForm = () => {
     alert('Cadastrado com sucesso!');
   }
 
+
   function handleChange(event) {
-    const name = event.target.paciente_name;
+    const name = event.target.name;
     const value = event.target.value.toUpperCase();
     setValues(values => ({ ...values, [name]: value }))
   }
+
 
   return (
     <div>
@@ -163,8 +166,8 @@ const SimpleForm = () => {
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <TextField
               required
-              id="nome"
-              name="nome"
+              id="paciente_nome"
+              name="paciente_nome"
               label="Nome do Paciente"
               fullWidth
               value={values.paciente_nome || ""}
@@ -175,7 +178,7 @@ const SimpleForm = () => {
             <TextField
               required
               type="text"
-              name="cormobidade"
+              name="paciente_cormobidade"
               id="standard-basic"
               value={values.paciente_cormobidade || ""}
               onChange={handleChange}
@@ -198,7 +201,7 @@ const SimpleForm = () => {
               sx={{ width: '30ch' }}
               required
               id="cpf"
-              name="cpf"
+              name="paciente_cpf"
               label="CPF"
               fullWidth
               onChange={handleChange}
@@ -215,7 +218,7 @@ const SimpleForm = () => {
               sx={{ width: '30ch' }}
               required
               id="telefone"
-              name="telefone"
+              name="paciente_telefone"
               label="Telefone"
               fullWidth
               onChange={handleChange}
@@ -230,7 +233,7 @@ const SimpleForm = () => {
               sx={{ width: '30ch' }}
               required
               type='date'
-              name="nascimento"
+              name="paciente_nascimento"
               value={values.paciente_nascimento || ""}
               onChange={handleChange}
               errorMessages={["Este campo é obrigatório"]}

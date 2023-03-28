@@ -37,6 +37,7 @@ const AutoComplete = styled(Autocomplete)(() => ({
 const suggestionsCarro = [
   { label: 'NÃO' },
   { label: 'SIM' },
+  { label: 'ESPECIAL' },
   { label: 'DUCA' },
   { label: 'NEIDE' },
 ];
@@ -54,7 +55,7 @@ const SimpleForm = () => {
     return { label: item.hospital_nome, key: item.hospital_id };
   });
   const sugestionPaciente = paciente.map((item) => {
-    return { label: item.paciente_nome, key: item.paciente_id };
+    return { label: [item.paciente_nome, ' - ', item.paciente_nascimento, ' - ', item.paciente_cpf], key: item.paciente_id };
   });
 
   useEffect(() => {
@@ -88,17 +89,16 @@ const SimpleForm = () => {
         );
       })
     alert('Agendado com sucesso!');
-
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1000);
   }
-
 
   function handleChange(event) {
     const name = event.target.name;
     const value = event.target.value.toUpperCase();
     setValues(values => ({ ...values, [name]: value }))
   }
-
-
 
   return (
     <div>

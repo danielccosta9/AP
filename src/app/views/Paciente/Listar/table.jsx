@@ -39,7 +39,7 @@ const PaginationTable = () => {
     }, [])
 
     // const handleDelete = (id) => {
-    //     Axios.delete(`${baseURL}/${id}`)
+    //     Axios.delete(`${baseURLPaciente}/${id}`)
     //         .then(() => {
     //             const newAgendados = paciente.filter((paciente) => paciente.id !== id);
     //             setPaciente(newAgendados);
@@ -83,9 +83,9 @@ const PaginationTable = () => {
                 <TableHead>
                     <TableRow>
                         <TableCell align="left">Nome</TableCell>
-                        <TableCell align="center">CPF</TableCell>
-                        <TableCell align="center">Nascimento</TableCell>
-                        <TableCell align="center">Telefone</TableCell>
+                        <TableCell align="left">CPF</TableCell>
+                        <TableCell align="left">Nascimento</TableCell>
+                        <TableCell align="left">Telefone</TableCell>
                         <TableCell align="left">Residência</TableCell>
                     </TableRow>
                 </TableHead>
@@ -95,9 +95,9 @@ const PaginationTable = () => {
                         .map((paciente, index) => (
                             <TableRow key={index} hover>
                                 <TableCell align="left">{paciente.paciente_nome}</TableCell>
-                                <TableCell align="center">{paciente.paciente_cpf}</TableCell>
-                                <TableCell align="center">{paciente.paciente_nascimento}</TableCell>
-                                <TableCell align="center">{paciente.paciente_telefone}</TableCell>
+                                <TableCell align="left">{paciente.paciente_cpf}</TableCell>
+                                <TableCell align="left">{paciente.paciente_nascimento}</TableCell>
+                                <TableCell align="left">{paciente.paciente_telefone}</TableCell>
                                 <TableCell align="left">{paciente.paciente_residencia}</TableCell>
                                 {/* <TableCell align="right">
                                     <IconButton

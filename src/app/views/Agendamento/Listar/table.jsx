@@ -44,6 +44,9 @@ const PaginationTable = () => {
                 setAgendados(newAgendados);
             })
         alert("Viagem realizada com sucesso!");
+        setTimeout(() => {
+            window.location.reload(false);
+        }, 1000);
     };
 
     const agenda = agendados;
@@ -81,12 +84,12 @@ const PaginationTable = () => {
                     <TableRow>
                         <TableCell align="left">Data</TableCell>
                         <TableCell align="left">Nome do Paciente</TableCell>
-                        <TableCell align="left">CPF</TableCell>
-                        <TableCell align="left">Telefone</TableCell>
+                        <TableCell align="center">CPF</TableCell>
+                        <TableCell align="center">Telefone</TableCell>
                         <TableCell align="left">Saída</TableCell>
                         <TableCell align="left">Marcado</TableCell>
                         <TableCell align="center">Nome do Hospital</TableCell>
-                        <TableCell align="center">Carro</TableCell>
+                        <TableCell align="right">Carro</TableCell>
                         <TableCell align="right">Viajou</TableCell>
                     </TableRow>
                 </TableHead>
@@ -100,12 +103,12 @@ const PaginationTable = () => {
                                     <TableRow key={agenda.id} hover>
                                         <TableCell align="left">{new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(agenda.agenda_data).getTime() + 24 * 60 * 60 * 1000)}</TableCell>
                                         <TableCell align="left">{agenda.paciente_nome}</TableCell>
-                                        <TableCell align="left">{agenda.paciente_cpf}</TableCell>
-                                        <TableCell align="left">{agenda.paciente_telefone}</TableCell>
+                                        <TableCell align="center">{agenda.paciente_cpf}</TableCell>
+                                        <TableCell align="center">{agenda.paciente_telefone}</TableCell>
                                         <TableCell align="left">{agenda.agenda_saida}</TableCell>
                                         <TableCell align="left">{agenda.agenda_marcado}</TableCell>
                                         <TableCell align="left">{agenda.hospital_nome}</TableCell>
-                                        <TableCell align="center">{agenda.agenda_carro}</TableCell>
+                                        <TableCell align="right">{agenda.agenda_carro}</TableCell>
                                         <TableCell align="right">
                                             <IconButton
                                                 onClick={handleDelete.bind(this, agenda.agenda_id)}

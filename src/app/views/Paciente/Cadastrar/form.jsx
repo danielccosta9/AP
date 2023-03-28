@@ -39,7 +39,6 @@ const suggestionsHouse = [
   { label: 'BAIRRO - CASTELO BRANCO' },
   { label: 'BAIRRO - SAO SEBASTIAO' },
   { label: 'BAIRRO - SANTO AMARO' },
-  { label: 'BAIRRO - SANTO AMARO' },
   { label: 'BAIRRO - JOSÉ PESSOA DE BRITO' },
   { label: 'BAIRRO - EMÍLIA BORGES ' },
   { label: 'SÍTIO - BONITA' },
@@ -59,6 +58,7 @@ const suggestionsHouse = [
   { label: 'SÍTIO - MEREREBA' },
   { label: 'SÍTIO - MERCADOR DE BAIXO' },
   { label: 'SÍTIO - MERCADOR DE CIMA' },
+  { label: 'SÍTIO - MUNLUNGUZINHO' },
   { label: 'SÍTIO - OLHO D`ÀGUA' },
   { label: 'SÍTIO - GENIPAPO DE TAUMATA' },
   { label: 'SÍTIO - GRAVATA DE PIABAS' },
@@ -150,8 +150,10 @@ const SimpleForm = () => {
         setValues({});
       })
     alert('Cadastrado com sucesso!');
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1000);
   }
-
 
   function handleChange(event) {
     const name = event.target.name;
@@ -233,9 +235,12 @@ const SimpleForm = () => {
             <TextField
               sx={{ width: '30ch' }}
               required
-              type='date'
+              label="Data de Nascimento"
               name="nascimento"
               value={values.nascimento || ""}
+              InputProps={{
+                inputComponent: InputDate,
+              }}
               onChange={handleChange}
               errorMessages={["Este campo é obrigatório"]}
               validators={["required"]}

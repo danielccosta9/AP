@@ -54,13 +54,39 @@ const StatCards = () => {
       .then(json => setAgendados(json.data))
   }, [])
 
-  const quantidadePaciente = paciente;
-  const quantidadeAgendados = agendados;
+
+  function formatDate(date) {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
+  const dataAmanha = formatDate(new Date().setDate(new Date().getDate() + 1));
+  const dataDepoisAmanha = formatDate(new Date().setDate(new Date().getDate() + 2));
+
+  const amanha = dataAmanha + "T00:00:00.000Z"
+  const depoisAmanha = dataDepoisAmanha + "T00:00:00.000Z"
+
+  const quantidadeAmanha = agendados.filter((item) => {
+    return item.agenda_data === amanha
+  })
+
+  const quantidadeDepoisAmanha = agendados.filter((item) => {
+    return item.agenda_data === depoisAmanha
+  })
 
 
   const cardList = [
-    { name: 'Nº de Pacientes Cadastrados', amount: quantidadePaciente.length + ' - Pacientes', icon: 'folder_shared' },
-    { name: 'Nº Restante de Pacientes Agendados', amount: quantidadeAgendados.length + ' - Pacientes', icon: 'folder_shared' },
+    { name: 'Nº de Agendados para Amanhã ', amount: quantidadeAmanha.length + ' - Pacientes', icon: 'folder_shared' },
+    { name: 'Nº de Agendados para Depois de Amanhã', amount: quantidadeDepoisAmanha.length + ' - Pacientes', icon: 'folder_shared' },
+    { name: 'Nº Restante de Pacientes Agendados', amount: agendados.length + ' - Pacientes', icon: 'folder_shared' },
+    { name: 'Nº de Pacientes Cadastrados', amount: paciente.length + ' - Pacientes', icon: 'folder_shared' },
   ];
 
   return (

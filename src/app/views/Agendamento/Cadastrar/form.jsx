@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import Axios from "axios";
 
+import suggestionsCar from './suggestionsCar';
+
 import {
   Autocomplete,
   Button,
@@ -33,14 +35,6 @@ const AutoComplete = styled(Autocomplete)(() => ({
   marginTop: '40px',
   marginBottom: '16px',
 }));
-
-const suggestionsCarro = [
-  { label: 'NÃO' },
-  { label: 'SIM' },
-  { label: 'ESPECIAL' },
-  { label: 'DUCA' },
-  { label: 'NEIDE' },
-];
 
 const SimpleForm = () => {
   const baseURLAgenda = "https://api-paciente.cyclic.app/agenda";
@@ -131,7 +125,7 @@ const SimpleForm = () => {
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 <AutoComplete
                   name="carro"
-                  options={suggestionsCarro}
+                  options={suggestionsCar}
                   getOptionLabel={(option) => option.label}
                   renderInput={(params) => (
                     <TextField {...params} label="Carro" variant="outlined" required />

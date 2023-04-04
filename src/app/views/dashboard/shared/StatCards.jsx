@@ -55,6 +55,7 @@ const StatCards = () => {
   }, [])
 
 
+  // Formatar a data
   function formatDate(date) {
     var d = new Date(date),
       month = '' + (d.getMonth() + 1),
@@ -67,26 +68,68 @@ const StatCards = () => {
     return [year, month, day].join('-');
   }
 
+  // Pegar data de amanhã = hoje + 1
   const dataAmanha = formatDate(new Date().setDate(new Date().getDate() + 1));
+  // Pegar data depois de amanhã = hoje + 2
   const dataDepoisAmanha = formatDate(new Date().setDate(new Date().getDate() + 2));
 
+  // Corrigindo para deixar no formato da API
   const amanha = dataAmanha + "T00:00:00.000Z"
   const depoisAmanha = dataDepoisAmanha + "T00:00:00.000Z"
 
+  // Retornando os valores
   const quantidadeAmanha = agendados.filter((item) => {
     return item.agenda_data === amanha
   })
-
   const quantidadeDepoisAmanha = agendados.filter((item) => {
     return item.agenda_data === depoisAmanha
   })
 
+  // Manhã ou Tarde - Amanhã
+  const AManha = quantidadeAmanha.filter((item) => {
+    return item.agenda_saida < '11:00'
+  })
+  const ATarde = quantidadeAmanha.filter((item) => {
+    return item.agenda_saida >= '11:00'
+  })
+
+  // Manhã ou Tarde - Depois de amanhã
+  const DManha = quantidadeDepoisAmanha.filter((item) => {
+    return item.agenda_saida < '11:00'
+  })
+  const DTarde = quantidadeDepoisAmanha.filter((item) => {
+    return item.agenda_saida >= '11:00'
+  })
 
   const cardList = [
-    { name: 'Nº de Agendados para Amanhã ', amount: quantidadeAmanha.length + ' - Pacientes', icon: 'folder_shared' },
-    { name: 'Nº de Agendados para Depois de Amanhã', amount: quantidadeDepoisAmanha.length + ' - Pacientes', icon: 'folder_shared' },
-    { name: 'Nº Restante de Pacientes Agendados', amount: agendados.length + ' - Pacientes', icon: 'folder_shared' },
-    { name: 'Nº de Pacientes Cadastrados', amount: paciente.length + ' - Pacientes', icon: 'folder_shared' },
+    {
+      name: 'Nº de Agendados para Amanhã ',
+      amount: `
+        ( ${AManha.length} - Manhã )
+        ( ${ATarde.length} - Tarde )
+        ( ${quantidadeAmanha.length} - Total )
+        `,
+      icon: 'folder_shared'
+    },
+    {
+      name: 'Nº de Agendados para Depois de Amanhã',
+      amount: `
+        ( ${DManha.length} - Manhã )
+        ( ${DTarde.length} - Tarde )
+        ( ${quantidadeDepoisAmanha.length} - Total )
+        `,
+      icon: 'folder_shared'
+    },
+    {
+      name: 'Nº Restante de Pacientes Agendados',
+      amount: agendados.length + ' - Pacientes',
+      icon: 'folder_shared'
+    },
+    {
+      name: 'Nº de Pacientes Cadastrados',
+      amount: paciente.length + ' - Pacientes',
+      icon: 'folder_shared'
+    },
   ];
 
   return (

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import { IMaskInput } from 'react-imask';
 import { useState } from "react";
 import Axios from "axios";
+
+import suggestionsHouse from "./suggestionsHouse";
+import { InputCpf, InputDate, InputPhone } from "../../InputForms"
 
 import {
   Autocomplete,
@@ -32,115 +33,9 @@ const AutoComplete = styled(Autocomplete)(() => ({
   marginBottom: '16px',
 }));
 
-const suggestionsHouse = [
-  { label: 'CENTRO' },
-  { label: 'ZONA RUAL' },
-  { label: 'BAIRRO - BELA VISTA' },
-  { label: 'BAIRRO - CASTELO BRANCO' },
-  { label: 'BAIRRO - SAO SEBASTIAO' },
-  { label: 'BAIRRO - SANTO AMARO' },
-  { label: 'BAIRRO - JOSÉ PESSOA DE BRITO' },
-  { label: 'BAIRRO - EMÍLIA BORGES ' },
-  { label: 'SÍTIO - BONITA' },
-  { label: 'SÍTIO - BARRA DA ESPINGARDA' },
-  { label: 'SÍTIO - CANAFISTULA' },
-  { label: 'SÍTIO - CANAFISTINHA' },
-  { label: 'SÍTIO - CACHOEIRA' },
-  { label: 'SÍTIO - CIPOAL' },
-  { label: 'SÍTIO - CHA DO MASCATE' },
-  { label: 'SÍTIO - CUITE MENINO DEUS' },
-  { label: 'SÍTIO - JACINTO' },
-  { label: 'SÍTIO - LAGOA DAS VELHAS' },
-  { label: 'SÍTIO - LAGOA DO FELIX' },
-  { label: 'SÍTIO - MATA DE ESTREITO' },
-  { label: 'SÍTIO - MASCATE' },
-  { label: 'SÍTIO - MARMARAU' },
-  { label: 'SÍTIO - MEREREBA' },
-  { label: 'SÍTIO - MERCADOR DE BAIXO' },
-  { label: 'SÍTIO - MERCADOR DE CIMA' },
-  { label: 'SÍTIO - MUNLUNGUZINHO' },
-  { label: 'SÍTIO - OLHO D`ÀGUA' },
-  { label: 'SÍTIO - GENIPAPO DE TAUMATA' },
-  { label: 'SÍTIO - GRAVATA DE PIABAS' },
-  { label: 'SÍTIO - GUARIBAS' },
-  { label: 'SÍTIO - PACHECO ' },
-  { label: 'SÍTIO - PITOMBAS' },
-  { label: 'SÍTIO - PIABAS' },
-  { label: 'SÍTIO - RIACHO GRNADE' },
-  { label: 'SÍTIO - RIACHO DE BAIXO' },
-  { label: 'SÍTIO - SANTA LUCIA' },
-  { label: 'SÍTIO - SAO VICENTE' },
-  { label: 'SÍTIO - VIOLETA' },
-];
-
-const InputCpf = React.forwardRef(function InputCpf(props, ref) {
-  const { onChange, ...other } = props;
-  return (
-    <IMaskInput
-      {...other}
-      mask="000.000.000-00"
-      definitions={{
-        '#': /[1-9]/,
-      }}
-      inputRef={ref}
-      onAccept={(value) => onChange({ target: { name: props.name, value } })}
-      overwrite
-    />
-  );
-});
-
-const InputDate = React.forwardRef(function InputDate(props, ref) {
-  const { onChange, ...other } = props;
-  return (
-    <IMaskInput
-      {...other}
-      mask="00/00/0000"
-      definitions={{
-        '#': /[1-9]/,
-      }}
-      inputRef={ref}
-      onAccept={(value) => onChange({ target: { name: props.name, value } })}
-      overwrite
-    />
-  );
-});
-
-const InputPhone = React.forwardRef(function InputPhone(props, ref) {
-  const { onChange, ...other } = props;
-  return (
-    <IMaskInput
-      {...other}
-      mask="(00) 00000-0000"
-      definitions={{
-        '#': /[1-9]/,
-      }}
-      inputRef={ref}
-      onAccept={(value) => onChange({ target: { name: props.name, value } })}
-      overwrite
-    />
-  );
-});
-
-InputCpf.propTypes = {
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
-
-InputDate.propTypes = {
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
-
-InputPhone.propTypes = {
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
-
 const SimpleForm = () => {
   const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
   const [values, setValues] = useState({});
-
-  console.log(values);
 
   function submit(event) {
     event.preventDefault();
@@ -160,7 +55,6 @@ const SimpleForm = () => {
     const value = event.target.value.toUpperCase();
     setValues(values => ({ ...values, [name]: value }))
   }
-
 
   return (
     <div>

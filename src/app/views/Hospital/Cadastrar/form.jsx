@@ -2,6 +2,9 @@ import * as React from 'react';
 import { useState } from "react";
 import Axios from "axios";
 
+import suggestionsStates from './suggestionsStates';
+
+
 import {
   Autocomplete,
   Button,
@@ -29,12 +32,7 @@ const button = {
   borderRadius: '15px',
 };
 
-const suggestionsEstado = [
-  { label: 'JOAO PESSOA - PB' },
-  { label: 'CAMPINA GRANDE - PB' },
-  { label: 'RECIFE - PE' },
-  { label: 'NATAL - RN' },
-];
+
 
 const SimpleForm = () => {
   const baseURLHospital = "https://api-paciente.cyclic.app/hospital";
@@ -76,7 +74,7 @@ const SimpleForm = () => {
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <AutoComplete
-              options={suggestionsEstado}
+              options={suggestionsStates}
               getOptionLabel={(option) => option.label}
               renderInput={(params) => (
                 <TextField {...params} label="Local" variant="outlined" required />

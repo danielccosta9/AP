@@ -11,8 +11,8 @@ import {
     TablePagination,
     TableRow,
     Input,
-    // IconButton,
-    // Icon,
+    IconButton,
+    Icon,
 } from "@mui/material";
 
 const StyledTable = styled(Table)(() => ({
@@ -38,15 +38,15 @@ const PaginationTable = () => {
             .then(json => setPaciente(json.data))
     }, [])
 
-    // const handleDelete = (id) => {
-    //     Axios.delete(`${baseURLPaciente}/${id}`)
-    //         .then(() => {
-    //             const newAgendados = paciente.filter((paciente) => paciente.id !== id);
-    //             setPaciente(newAgendados);
-    //         })
-    //     alert("Viagem realizada com sucesso!");
-    //     window.location.reload();
-    // };
+    const handleDelete = (id) => {
+        Axios.delete(`${baseURLPaciente}/${id}`)
+            .then(() => {
+                const newAgendados = paciente.filter((paciente) => paciente.id !== id);
+                setPaciente(newAgendados);
+            })
+        alert("Viagem realizada com sucesso!");
+        window.location.reload();
+    };
 
     const quantidadePaciente = paciente;
 
@@ -87,6 +87,7 @@ const PaginationTable = () => {
                         <TableCell align="left">Nascimento</TableCell>
                         <TableCell align="left">Telefone</TableCell>
                         <TableCell align="left">Residência</TableCell>
+                        <TableCell align="right">Excluir</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -99,13 +100,13 @@ const PaginationTable = () => {
                                 <TableCell align="left">{paciente.paciente_nascimento}</TableCell>
                                 <TableCell align="left">{paciente.paciente_telefone}</TableCell>
                                 <TableCell align="left">{paciente.paciente_residencia}</TableCell>
-                                {/* <TableCell align="right">
+                                <TableCell align="right">
                                     <IconButton
                                         onClick={handleDelete.bind(this, paciente.paciente_id)}
                                     >
-                                        <Icon color="success">done</Icon>
+                                        <Icon color="error">delete</Icon>
                                     </IconButton>
-                                </TableCell> */}
+                                </TableCell>
                             </TableRow>
                         ))}
                 </TableBody>

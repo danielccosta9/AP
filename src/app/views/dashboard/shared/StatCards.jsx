@@ -75,7 +75,6 @@ const StatCards = () => {
     formatDate(new Date().setDate(new Date().getDate() + 4)) + "T00:00:00.000Z",
     formatDate(new Date().setDate(new Date().getDate() + 5)) + "T00:00:00.000Z",
     formatDate(new Date().setDate(new Date().getDate() + 6)) + "T00:00:00.000Z",
-    formatDate(new Date().setDate(new Date().getDate() + 7)) + "T00:00:00.000Z",
   ]
 
   // Quantidade de pacientes agendados por dia
@@ -98,9 +97,6 @@ const StatCards = () => {
     }),
     agendados.filter((item) => {
       return item.agenda_data === arrayOfWeek[5]
-    }),
-    agendados.filter((item) => {
-      return item.agenda_data === arrayOfWeek[6]
     }),
   ]
 
@@ -165,16 +161,6 @@ const StatCards = () => {
     qtdForDay[5].filter((item) => {
       return item.agenda_saida
     }).length,
-
-    qtdForDay[6].filter((item) => {
-      return item.agenda_saida < '11:00'
-    }).length,
-    qtdForDay[6].filter((item) => {
-      return item.agenda_saida >= '11:00'
-    }).length,
-    qtdForDay[6].filter((item) => {
-      return item.agenda_saida
-    }).length,
   ]
 
   // Dias da semana inclementando
@@ -185,7 +171,6 @@ const StatCards = () => {
     new Date().getDay() + 4,
     new Date().getDay() + 5,
     new Date().getDay() + 6,
-    new Date().getDay() + 7,
   ]
 
   // eslint-disable-next-line no-array-constructor
@@ -207,7 +192,6 @@ const StatCards = () => {
     diasDaSemanaTexto[dayOfWeekArray[3] % 7],
     diasDaSemanaTexto[dayOfWeekArray[4] % 7],
     diasDaSemanaTexto[dayOfWeekArray[5] % 7],
-    diasDaSemanaTexto[dayOfWeekArray[6] % 7],
   ]
 
   const cardList = [
@@ -220,64 +204,67 @@ const StatCards = () => {
           ( ${qtdForDayAndTime[0]} - Manhã )
           ( ${qtdForDayAndTime[1]} - Tarde )
           ( ${qtdForDayAndTime[2]} - Total )`
-        }
-        
-        `,
+        }`,
       icon: 'folder_shared'
     },
     {
       name: `Nº de Agendados para ${dayOfWeekInTextArray[1]} `,
-
       amount: `
-        ( ${qtdForDayAndTime[3]} - Manhã )
-        ( ${qtdForDayAndTime[4]} - Tarde )
-        ( ${qtdForDayAndTime[5]} - Total )
-        `,
+        ${qtdForDayAndTime[3] === 0 && qtdForDayAndTime[4] === 0
+          ? `Não há agendados para ${dayOfWeekInTextArray[1]}`
+          : `
+          ( ${qtdForDayAndTime[3]} - Manhã )
+          ( ${qtdForDayAndTime[4]} - Tarde )
+          ( ${qtdForDayAndTime[5]} - Total )`
+        }`,
       icon: 'folder_shared'
     },
     {
       name: `Nº de Agendados para ${dayOfWeekInTextArray[2]} `,
       amount: `
-        ( ${qtdForDayAndTime[6]} - Manhã )
-        ( ${qtdForDayAndTime[7]} - Tarde )
-        ( ${qtdForDayAndTime[8]} - Total )
-        `,
+        ${qtdForDayAndTime[6] === 0 && qtdForDayAndTime[7] === 0
+          ? `Não há agendados para ${dayOfWeekInTextArray[2]}`
+          : `
+          ( ${qtdForDayAndTime[6]} - Manhã )
+          ( ${qtdForDayAndTime[7]} - Tarde )
+          ( ${qtdForDayAndTime[8]} - Total )`
+        }`,
       icon: 'folder_shared'
     },
     {
       name: `Nº de Agendados para ${dayOfWeekInTextArray[3]} `,
       amount: `
-        ( ${qtdForDayAndTime[9]} - Manhã )
-        ( ${qtdForDayAndTime[10]} - Tarde )
-        ( ${qtdForDayAndTime[11]} - Total )
-        `,
+        ${qtdForDayAndTime[9] === 0 && qtdForDayAndTime[10] === 0
+          ? `Não há agendados para ${dayOfWeekInTextArray[3]}`
+          : `
+          ( ${qtdForDayAndTime[9]} - Manhã )
+          ( ${qtdForDayAndTime[10]} - Tarde )
+          ( ${qtdForDayAndTime[11]} - Total )`
+        }`,
       icon: 'folder_shared'
     },
     {
       name: `Nº de Agendados para ${dayOfWeekInTextArray[4]} `,
       amount: `
-        ( ${qtdForDayAndTime[12]} - Manhã )
-        ( ${qtdForDayAndTime[13]} - Tarde )
-        ( ${qtdForDayAndTime[14]} - Total )
-        `,
+        ${qtdForDayAndTime[12] === 0 && qtdForDayAndTime[13] === 0
+          ? `Não há agendados para ${dayOfWeekInTextArray[4]}`
+          : `
+          ( ${qtdForDayAndTime[12]} - Manhã )
+          ( ${qtdForDayAndTime[13]} - Tarde )
+          ( ${qtdForDayAndTime[14]} - Total )`
+        }`,
       icon: 'folder_shared'
     },
     {
       name: `Nº de Agendados para ${dayOfWeekInTextArray[5]} `,
       amount: `
-        ( ${qtdForDayAndTime[15]} - Manhã )
-        ( ${qtdForDayAndTime[16]} - Tarde )
-        ( ${qtdForDayAndTime[17]} - Total )
-        `,
-      icon: 'folder_shared'
-    },
-    {
-      name: `Nº de Agendados para ${dayOfWeekInTextArray[6]} `,
-      amount: `
-        ( ${qtdForDayAndTime[18]} - Manhã )
-        ( ${qtdForDayAndTime[19]} - Tarde )
-        ( ${qtdForDayAndTime[20]} - Total )
-        `,
+        ${qtdForDayAndTime[15] === 0 && qtdForDayAndTime[16] === 0
+          ? `Não há agendados para ${dayOfWeekInTextArray[5]}`
+          : `
+          ( ${qtdForDayAndTime[15]} - Manhã )
+          ( ${qtdForDayAndTime[16]} - Tarde )
+          ( ${qtdForDayAndTime[17]} - Total )`
+        }`,
       icon: 'folder_shared'
     },
     {

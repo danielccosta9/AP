@@ -49,7 +49,7 @@ const SimpleForm = () => {
     return { label: item.hospital_nome, key: item.hospital_id };
   });
   const sugestionPaciente = paciente.map((item) => {
-    return { label: [item.paciente_nome, ' - ', item.paciente_nascimento, ' - ', item.paciente_cpf], key: item.paciente_id };
+    return { label: [item.paciente_nome, ' - ', item.paciente_cpf, ' - ', item.paciente_nascimento], key: item.paciente_id };
   });
 
   useEffect(() => {

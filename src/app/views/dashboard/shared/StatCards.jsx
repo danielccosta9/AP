@@ -268,7 +268,7 @@ const StatCards = () => {
       icon: 'folder_shared'
     },
     {
-      name: 'Nº Restante de Pacientes Agendados',
+      name: 'Nº de Pacientes Agendados',
       amount: agendados.length + ' - Pacientes',
       icon: 'folder_shared'
     },

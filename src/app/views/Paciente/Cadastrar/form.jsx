@@ -2,11 +2,11 @@ import * as React from 'react';
 import { useState } from "react";
 import Axios from "axios";
 
-import suggestionsHouse from "./suggestionsHouse";
+// import suggestionsHouse from "./suggestionsHouse";
 import { InputCpf, InputDate, InputPhone } from "../../InputForms"
 
 import {
-  Autocomplete,
+  // Autocomplete,
   Button,
   Grid,
   Icon,
@@ -29,9 +29,9 @@ const button = {
   borderRadius: '15px',
 };
 
-const AutoComplete = styled(Autocomplete)(() => ({
-  marginBottom: '16px',
-}));
+// const AutoComplete = styled(Autocomplete)(() => ({
+//   marginBottom: '16px',
+// }));
 
 const SimpleForm = () => {
   const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
@@ -84,13 +84,25 @@ const SimpleForm = () => {
               validators={["required", "minStringLength: 3", "maxStringLength: 100"]}
             />
 
-            <AutoComplete
+            {/* <AutoComplete
               options={suggestionsHouse}
               getOptionLabel={(option) => option.label}
               renderInput={(params) => (
                 <TextField {...params} label="Residencia" variant="outlined" required />
               )}
               onChange={(event, value) => setValues(values => ({ ...values, residencia: value.label }))}
+            /> */}
+
+            <TextField
+              required
+              type="text"
+              name="residencia"
+              id="standard-basic"
+              value={values.residencia || ""}
+              onChange={handleChange}
+              errorMessages={["Este campo é obrigatório"]}
+              label="Residencia"
+              validators={["required", "minStringLength: 3", "maxStringLength: 100"]}
             />
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>

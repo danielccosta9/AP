@@ -6,6 +6,7 @@ import { lazy } from 'react';
 const AppFormCadAgendamento = Loadable(lazy(() => import('../Agendamento/Cadastrar/index')));
 // Caminho Listar Agendamento
 const AppListAgendamento = Loadable(lazy(() => import('../Agendamento/Listar/index')));
+const AppListAgendamentoAuto = Loadable(lazy(() => import('../Agendamento/ListarAuto/index')));
 
 // Paciente
 // Caminho Cadastrar Pacientes
@@ -35,6 +36,10 @@ const materialRoutes = [
   {
     path: '/agendamento/listar-agendamento',
     element: <AppListAgendamento />,
+  },
+  {
+    path: '/agendamento/listar-agendamento-auto',
+    element: <AppListAgendamentoAuto />,
   },
 
   // Paciente

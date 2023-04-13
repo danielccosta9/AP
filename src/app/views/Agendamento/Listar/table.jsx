@@ -27,9 +27,11 @@ const StyledTable = styled(Table)(() => ({
 
 const PaginationTable = () => {
     const baseURL = "https://api-paciente.cyclic.app/agenda";
+    const baseURLAgendadosAuto = "https://api-paciente.cyclic.app/agendaauto";
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [agendados, setAgendados] = useState([]);
+    const [agendadosAuto, setAgendadosAuto] = useState([]);
     const [busca, setBusca] = useState('');
 
     useEffect(() => {
@@ -37,8 +39,14 @@ const PaginationTable = () => {
             .then(json => setAgendados(json.data))
     }, []);
 
+    useEffect(() => {
+        Axios.get(baseURLAgendadosAuto)
+            .then(json => setAgendadosAuto(json.data))
+    }, []);
+
+    // Deletar agendamento do baseURL ou baseURLAgendadosAuto
     const handleDelete = (id) => {
-        Axios.delete(`${baseURL}/${id}`)
+        Axios.delete(`${baseURL}/${id} || ${baseURLAgendadosAuto}/${id}`)
             .then(() => {
                 const newAgendados = agendados.filter((agendado) => agendado.id !== id);
                 setAgendados(newAgendados);
@@ -49,7 +57,7 @@ const PaginationTable = () => {
         }, 1000);
     };
 
-    const agenda = agendados;
+    const agenda = agendados.concat(agendadosAuto)
 
 
     const handleChangePage = (_, newPage) => {
@@ -63,7 +71,10 @@ const PaginationTable = () => {
 
     const filteredPaciente = useMemo(() => {
         return agenda.filter((agenda) => {
-            return agenda.paciente_nome.toLowerCase().includes(busca.toLowerCase());
+            return (
+                agenda.paciente_nome.toLowerCase().includes(busca.toLowerCase()) ||
+                agenda.agenda_data.toLowerCase().includes(busca.toLowerCase())
+            );
         });
     }, [busca, agenda]);
 
@@ -111,7 +122,7 @@ const PaginationTable = () => {
                                         <TableCell align="right">{agenda.agenda_carro}</TableCell>
                                         <TableCell align="right">
                                             <IconButton
-                                                onClick={handleDelete.bind(this, agenda.agenda_id)}
+                                                onClick={handleDelete.bind(this, agenda.agenda_id || agenda.id)}
                                             >
                                                 <Icon color="success">done</Icon>
                                             </IconButton>

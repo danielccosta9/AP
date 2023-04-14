@@ -82,12 +82,12 @@ const PaginationTable = () => {
             <StyledTable>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="left">Nome</TableCell>
-                        <TableCell align="left">CPF</TableCell>
-                        <TableCell align="left">Nascimento</TableCell>
-                        <TableCell align="left">Telefone</TableCell>
-                        <TableCell align="left">Residência</TableCell>
-                        <TableCell align="right">Excluir</TableCell>
+                        <TableCell align="left" width={350}>Nome do Paciente</TableCell>
+                        <TableCell align="center" width={120}>CPF</TableCell>
+                        <TableCell align="center" width={120}>Nascimento</TableCell>
+                        <TableCell align="center" width={120}>Telefone</TableCell>
+                        <TableCell align="left" width={200}>Residência</TableCell>
+                        <TableCell align="right" width={80}>Excluir</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -96,9 +96,9 @@ const PaginationTable = () => {
                         .map((paciente, index) => (
                             <TableRow key={index} hover>
                                 <TableCell align="left">{paciente.paciente_nome}</TableCell>
-                                <TableCell align="left">{paciente.paciente_cpf}</TableCell>
-                                <TableCell align="left">{paciente.paciente_nascimento}</TableCell>
-                                <TableCell align="left">{paciente.paciente_telefone}</TableCell>
+                                <TableCell align="center">{paciente.paciente_cpf}</TableCell>
+                                <TableCell align="center">{paciente.paciente_nascimento}</TableCell>
+                                <TableCell align="center">{paciente.paciente_telefone}</TableCell>
                                 <TableCell align="left">{paciente.paciente_residencia}</TableCell>
                                 <TableCell align="right">
                                     <IconButton

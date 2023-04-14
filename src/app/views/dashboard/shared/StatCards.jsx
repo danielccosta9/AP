@@ -40,8 +40,10 @@ const StatCards = () => {
 
   const [paciente, setPaciente] = useState([]);
   const [agendados, setAgendados] = useState([]);
+  const [agendadosAuto, setAgendadosAuto] = useState([]);
   const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
   const baseURLAgendados = "https://api-paciente.cyclic.app/agenda";
+  const baseURLAgendadosAuto = "https://api-paciente.cyclic.app/agendaauto";
 
 
   useEffect(() => {
@@ -54,6 +56,12 @@ const StatCards = () => {
       .then(json => setAgendados(json.data))
   }, [])
 
+  useEffect(() => {
+    Axios.get(baseURLAgendadosAuto)
+      .then(json => setAgendadosAuto(json.data))
+  }, [])
+
+  const agenda = agendados.concat(agendadosAuto)
 
   // Formatar a data
   function formatDate(date) {
@@ -80,22 +88,22 @@ const StatCards = () => {
   // Quantidade de pacientes agendados por dia
 
   const qtdForDay = [
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[0]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[1]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[2]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[3]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[4]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[5]
     }),
   ]
@@ -269,7 +277,7 @@ const StatCards = () => {
     },
     {
       name: 'Nº de Pacientes Agendados',
-      amount: agendados.length + ' - Pacientes',
+      amount: agenda.length + ' - Pacientes',
       icon: 'folder_shared'
     },
     {

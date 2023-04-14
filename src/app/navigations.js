@@ -7,8 +7,7 @@ export const navigations = [
     icon: 'event_available',
     children: [
       { name: 'Agendar', iconText: 'A', path: '/agendamento/cadastrar-agendamento' },
-      { name: 'Agendamentos', iconText: 'L', path: '/agendamento/listar-agendamento' },
-      { name: 'Agendamentos Auto', iconText: 'L', path: '/agendamento/listar-agendamento-auto' },
+      { name: 'Lista de Agendados', iconText: 'L', path: '/agendamento/listar-agendamento' },
     ],
   },
   { label: 'Paciente', type: 'label' },

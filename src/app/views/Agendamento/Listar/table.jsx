@@ -46,10 +46,15 @@ const PaginationTable = () => {
 
     // Deletar agendamento do baseURL ou baseURLAgendadosAuto
     const handleDelete = (id) => {
-        Axios.delete(`${baseURL}/${id} || ${baseURLAgendadosAuto}/${id}`)
+        Axios.delete(`${baseURL}/${id}`)
             .then(() => {
-                const newAgendados = agendados.filter((agendado) => agendado.id !== id);
-                setAgendados(newAgendados);
+                const filtered = agendados.filter((agenda) => agenda.agenda_id !== id);
+                setAgendados(filtered);
+            })
+        Axios.delete(`${baseURLAgendadosAuto}/${id}`)
+            .then(() => {
+                const filtered = agendadosAuto.filter((agenda) => agenda.auto_id !== id);
+                setAgendadosAuto(filtered);
             })
         alert("Viagem realizada com sucesso!");
         setTimeout(() => {
@@ -93,15 +98,15 @@ const PaginationTable = () => {
             <StyledTable>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="left">Data</TableCell>
-                        <TableCell align="left">Nome do Paciente</TableCell>
-                        <TableCell align="center">CPF</TableCell>
-                        <TableCell align="center">Telefone</TableCell>
-                        <TableCell align="left">Saída</TableCell>
-                        <TableCell align="left">Marcado</TableCell>
-                        <TableCell align="center">Nome do Hospital</TableCell>
-                        <TableCell align="right">Carro</TableCell>
-                        <TableCell align="right">Viajou</TableCell>
+                        <TableCell align="left" width={100}>Data</TableCell>
+                        <TableCell align="left" width={350}>Nome do Paciente</TableCell>
+                        <TableCell align="center" width={120}>CPF</TableCell>
+                        <TableCell align="center" width={120}>Telefone</TableCell>
+                        <TableCell align="left" width={80}>Saída</TableCell>
+                        <TableCell align="left" width={80}>Marcado</TableCell>
+                        <TableCell align="center" width={350}>Nome do Hospital</TableCell>
+                        <TableCell align="right" width={80}>Carro</TableCell>
+                        <TableCell align="right" width={80}>Viajou</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -112,7 +117,15 @@ const PaginationTable = () => {
                             if (agenda.agenda_status === 'AGENDADO') {
                                 return (
                                     <TableRow key={agenda.id} hover>
-                                        <TableCell align="left">{new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(new Date(agenda.agenda_data).getTime() + 24 * 60 * 60 * 1000)}</TableCell>
+                                        <TableCell align="left">
+                                            {
+                                                new Intl.DateTimeFormat('pt-BR', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: '2-digit',
+                                                }).format(new Date(agenda.agenda_data).getTime() + 24 * 60 * 60 * 1000)
+                                            }
+                                        </TableCell>
                                         <TableCell align="left">{agenda.paciente_nome}</TableCell>
                                         <TableCell align="center">{agenda.paciente_cpf}</TableCell>
                                         <TableCell align="center">{agenda.paciente_telefone}</TableCell>
@@ -122,7 +135,7 @@ const PaginationTable = () => {
                                         <TableCell align="right">{agenda.agenda_carro}</TableCell>
                                         <TableCell align="right">
                                             <IconButton
-                                                onClick={handleDelete.bind(this, agenda.agenda_id || agenda.id)}
+                                                onClick={handleDelete.bind(this, agenda.agenda_id || agenda.auto_id)}
                                             >
                                                 <Icon color="success">done</Icon>
                                             </IconButton>

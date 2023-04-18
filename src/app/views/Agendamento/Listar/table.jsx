@@ -1,8 +1,10 @@
 import Axios from 'axios';
 import { useState, useEffect, useMemo } from "react";
+import agendaPDF from '../PDF/agendaPDF';
 
 import {
     Box,
+    Button,
     IconButton,
     Icon,
     Input,
@@ -90,11 +92,22 @@ const PaginationTable = () => {
                     type="text"
                     placeholder="Pesquisar por nome"
                     value={busca}
-                    sx={{ width: 300, marginBottom: '20px', marginTop: '20px' }}
+                    sx={{ width: 300, marginBottom: '50px', marginTop: '20px' }}
                     onChange={(e) => setBusca(e.target.value)}
                     icon="search"
                 />
+
+                {/* Gerar PDF */}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ marginLeft: '20px', marginBottom: '50px', marginTop: '20px' }}
+                    onClick={() => agendaPDF(filteredPaciente)}
+                >
+                    Gerar PDF
+                </Button>
             </form>
+
             <StyledTable>
                 <TableHead>
                     <TableRow>
@@ -158,7 +171,7 @@ const PaginationTable = () => {
                 nextIconButtonProps={{ "aria-label": "Next Page" }}
                 backIconButtonProps={{ "aria-label": "Previous Page" }}
             />
-        </Box>
+        </Box >
     );
 };
 

@@ -3,36 +3,23 @@ import pdfFonts from 'pdfmake/build/vfs_fonts'
 
 function agendaPDF(agenda) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-    // formatar data
-    const date = (data) => {
-        const date = new Date(data);
-        const dia = date.getDate().toString();
-        const diaF = (dia.length === 1) ? `0${dia}` : dia;
-        const mes = (date.getMonth() + 1).toString();
-        const mesF = (mes.length === 1) ? `0${mes}` : mes;
-        const anoF = date.getFullYear();
-        return `${diaF}/${mesF}/${anoF}`;
-    }
-
-    const reportTitle = [
-        {
-            text: 'Pacientes agendados',
-            fontSize: 15,
-            bold: true,
-            margin: [0, 45, 0, 45] // left, top, right, bottom
-        }
-    ];
-
     const dados = agenda.map((paciente) => {
         return [
-            { text: date(paciente.agenda_data), fontSize: 10, margin: [5, 20, 5, 20] },
-            { text: paciente.paciente_nome, fontSize: 10, margin: [5, 20, 5, 20], alignment: 'left' },
-            { text: paciente.paciente_cpf, fontSize: 10, margin: [5, 20, 5, 20], alignment: 'center' },
-            { text: paciente.paciente_telefone, fontSize: 10, margin: [5, 20, 5, 20], alignment: 'center' },
-            { text: paciente.agenda_saida, fontSize: 10, margin: [5, 20, 5, 20], alignment: 'center' },
-            { text: paciente.agenda_marcado, fontSize: 10, margin: [5, 20, 5, 20], alignment: 'center' },
-            { text: paciente.hospital_nome, fontSize: 10, margin: [5, 20, 5, 20], alignment: 'center' },
+            // left, top, right, bottom
+            {
+                // data + 1 dia
+                text: new Intl.DateTimeFormat('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: '2-digit',
+                }).format(new Date(paciente.agenda_data).getTime() + 24 * 60 * 60 * 1000), fontSize: 11, margin: [0, 17, 0, 17]
+            },
+            { text: paciente.paciente_nome, fontSize: 11, margin: [0, 17, 0, 17], alignment: 'left' },
+            { text: paciente.paciente_cpf, fontSize: 11, margin: [0, 17, 0, 17], alignment: 'center' },
+            { text: paciente.paciente_telefone, fontSize: 11, margin: [0, 17, 0, 17], alignment: 'center' },
+            { text: paciente.agenda_saida, fontSize: 11, margin: [0, 17, 0, 17], alignment: 'center' },
+            { text: paciente.agenda_marcado, fontSize: 11, margin: [0, 17, 0, 17], alignment: 'center' },
+            { text: paciente.hospital_nome, fontSize: 11, margin: [0, 17, 0, 17], alignment: 'center' },
             { text: '' },
         ]
     });
@@ -77,7 +64,7 @@ function agendaPDF(agenda) {
                 text: currentPage + ' / ' + pageCount,
                 alignment: 'right',
                 fontSize: 9,
-                margin: [0, 10, 20, 0] // left, top, right, bottom
+                margin: [1, 30, 1, 10] // left, top, right, bottom
             }
         ]
     }
@@ -85,10 +72,9 @@ function agendaPDF(agenda) {
     const docDefinitios = {
         pageSize: 'A4',
         pageOrientation: 'landscape',
-        pageMargins: [10, 30, 20, 10],
+        pageMargins: [1, 30, 1, 10],
 
         styles: { tableHeader: { bold: true, fontSize: 12, color: 'black' } },
-        header: [reportTitle],
         content: [details],
         footer: Rodape
     }

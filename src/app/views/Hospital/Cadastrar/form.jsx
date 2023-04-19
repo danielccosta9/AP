@@ -44,7 +44,10 @@ const SimpleForm = () => {
       .then(() => {
         setValues({});
       })
-    alert('Cadastrado com sucesso!');
+      .catch((error) => {
+        console.log(error);
+      })
+    window.confirm("Hospital cadastrado com sucesso!");
     setValues({});
   }
 

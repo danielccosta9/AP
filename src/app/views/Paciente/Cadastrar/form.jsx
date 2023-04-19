@@ -33,9 +33,12 @@ const AutoComplete = styled(Autocomplete)(() => ({
   marginBottom: '16px',
 }));
 
+
+
 const SimpleForm = () => {
   const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
   const [values, setValues] = useState({});
+
 
   function submit(event) {
     event.preventDefault();
@@ -44,6 +47,12 @@ const SimpleForm = () => {
       .then(() => {
         setValues({});
       })
+      .catch((error) => {
+        console.log(error);
+      })
+    window.confirm(
+      "Paciente cadastrado com sucesso!"
+    );
   }
 
   function handleChange(event) {
@@ -51,6 +60,7 @@ const SimpleForm = () => {
     const value = event.target.value.toUpperCase();
     setValues(values => ({ ...values, [name]: value }))
   }
+
 
   return (
     <div>

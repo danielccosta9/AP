@@ -71,21 +71,13 @@ const SimpleForm = () => {
     event.preventDefault();
     Axios.post(baseURLAgenda, values)
       .then(() => {
-        setValues(
-          {
-            paciente_id: '',
-            hospital_id: '',
-            data: '',
-            saida: '',
-            marcado: '',
-            carro: '',
-          }
-        );
+        setValues({});
       })
-    alert('Agendado com sucesso!');
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 1000);
+      .catch((error) => {
+        console.log(error);
+      })
+    window.confirm("Agendamento cadastrado com sucesso!");
+    setValues({});
   }
 
   function handleChange(event) {

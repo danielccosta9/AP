@@ -76,8 +76,11 @@ const SimpleForm = () => {
       .catch((error) => {
         console.log(error);
       })
-    window.confirm("Agendamento cadastrado com sucesso!");
-    setValues({});
+    setTimeout(() => {
+      window.confirm(
+        "Agendamento cadastrado com sucesso!"
+      ); window.location.reload();
+    }, 1000);
   }
 
   function handleChange(event) {

@@ -1,7 +1,7 @@
 const suggestionsCar = [
     { label: 'NÃO' },
     { label: 'SIM' },
-    { label: 'ESPECIAL' },
+    { label: 'ESP' },
     { label: 'DUCA' },
     { label: 'NEIDE' },
 ];

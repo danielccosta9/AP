@@ -39,13 +39,13 @@ const PaginationTable = () => {
     }, [])
 
     const handleDelete = (id) => {
-        Axios.delete(`${baseURLPaciente}/${id}`)
-            .then(() => {
-                const newAgendados = paciente.filter((paciente) => paciente.id !== id);
-                setPaciente(newAgendados);
-            })
-        alert("Viagem realizada com sucesso!");
-        window.location.reload();
+        if (window.confirm("Deseja realmente excluir este paciente?")) {
+            Axios.delete(`${baseURLPaciente}/${id}`)
+                .then(() => {
+                    const filtered = paciente.filter((paciente) => paciente.paciente_id !== id);
+                    setPaciente(filtered);
+                })
+        }
     };
 
     const quantidadePaciente = paciente;

@@ -44,10 +44,6 @@ const SimpleForm = () => {
       .then(() => {
         setValues({});
       })
-    alert('Cadastrado com sucesso!');
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 1000);
   }
 
   function handleChange(event) {

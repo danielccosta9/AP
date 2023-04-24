@@ -50,9 +50,9 @@ const SimpleForm = () => {
       .catch((error) => {
         console.log(error);
       })
-    window.confirm(
-      "Paciente cadastrado com sucesso!"
-    );
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   function handleChange(event) {

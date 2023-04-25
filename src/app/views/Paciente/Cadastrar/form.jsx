@@ -115,8 +115,20 @@ const SimpleForm = () => {
                 inputComponent: InputCpf,
               }}
             />
-
-
+            <TextField
+              sx={{ width: '30ch' }}
+              required
+              label="Data de Nascimento"
+              name="nascimento"
+              value={values.nascimento || ""}
+              InputProps={{
+                inputComponent: InputDate,
+              }}
+              onChange={handleChange}
+              errorMessages={["Este campo é obrigatório"]}
+              validators={["required"]}
+              id="formatted-text-mask-input"
+            />
             <TextField
               sx={{ width: '30ch' }}
               required
@@ -131,20 +143,6 @@ const SimpleForm = () => {
               InputProps={{
                 inputComponent: InputPhone,
               }}
-            />
-            <TextField
-              sx={{ width: '30ch' }}
-              required
-              label="Data de Nascimento"
-              name="nascimento"
-              value={values.nascimento || ""}
-              InputProps={{
-                inputComponent: InputDate,
-              }}
-              onChange={handleChange}
-              errorMessages={["Este campo é obrigatório"]}
-              validators={["required"]}
-              id="formatted-text-mask-input"
             />
           </Grid>
         </Grid>

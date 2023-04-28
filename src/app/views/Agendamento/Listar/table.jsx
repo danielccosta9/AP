@@ -58,10 +58,6 @@ const PaginationTable = () => {
                 const filtered = agendadosAuto.filter((agenda) => agenda.auto_id !== id);
                 setAgendadosAuto(filtered);
             })
-        alert("Viagem realizada com sucesso!");
-        setTimeout(() => {
-            window.location.reload(false);
-        }, 1000);
     };
 
     const agenda = agendados.concat(agendadosAuto)

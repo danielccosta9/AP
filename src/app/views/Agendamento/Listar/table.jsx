@@ -27,21 +27,14 @@ const StyledTable = styled(Table)(() => ({
 
 const PaginationTable = () => {
     const baseURL = "https://api-paciente.cyclic.app/agenda";
-    const baseURLAgendadosAuto = "https://api-paciente.cyclic.app/agendaauto";
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [agendados, setAgendados] = useState([]);
-    const [agendadosAuto, setAgendadosAuto] = useState([]);
     const [busca, setBusca] = useState('');
 
     useEffect(() => {
         Axios.get(baseURL)
             .then(json => setAgendados(json.data))
-    }, []);
-
-    useEffect(() => {
-        Axios.get(baseURLAgendadosAuto)
-            .then(json => setAgendadosAuto(json.data))
     }, []);
 
     // Deletar agendamento do baseURL ou baseURLAgendadosAuto
@@ -51,14 +44,7 @@ const PaginationTable = () => {
                 const filtered = agendados.filter((agenda) => agenda.agenda_id !== id);
                 setAgendados(filtered);
             })
-        Axios.delete(`${baseURLAgendadosAuto}/${id}`)
-            .then(() => {
-                const filtered = agendadosAuto.filter((agenda) => agenda.auto_id !== id);
-                setAgendadosAuto(filtered);
-            })
     };
-
-    const agenda = agendados.concat(agendadosAuto)
 
 
     const handleChangePage = (_, newPage) => {
@@ -70,14 +56,11 @@ const PaginationTable = () => {
         setPage(0);
     };
 
-    const filteredPaciente = useMemo(() => {
-        return agenda.filter((agenda) => {
-            return (
-                agenda.paciente_nome.toLowerCase().includes(busca.toLowerCase()) ||
-                agenda.agenda_data.toLowerCase().includes(busca.toLowerCase())
-            );
-        });
-    }, [busca, agenda]);
+    const agenda = useMemo(() => {
+        return agendados.filter((agenda) => {
+            return agenda.paciente_nome.toLowerCase().includes(busca.toLowerCase())
+        })
+    }, [agendados, busca])
 
     return (
         <Box width="100%" overflow="auto">
@@ -106,7 +89,7 @@ const PaginationTable = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {filteredPaciente
+                    {agenda
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         // eslint-disable-next-line array-callback-return
                         .map((agenda) => {

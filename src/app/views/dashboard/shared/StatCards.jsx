@@ -86,7 +86,6 @@ const StatCards = () => {
   ]
 
   // Quantidade de pacientes agendados por dia
-
   const qtdForDay = [
     agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[0]
@@ -231,9 +230,9 @@ const StatCards = () => {
           ? `Não há agendados para ${dayOfWeekInTextArray[0]}`
           : `
           ( ${qtdForDayAndTime[0]} - Manhã)
-          (${qtdToCar[0].length} - P/ Carro Baixo )
+          (${qtdToCar[0].length} - Carro Baixo )
           (${qtdForDayAndTime[1]} - Tarde)
-          (${qtdForDayAndTime[2]} - Total)`
+          `
         }`,
       icon: 'folder_shared'
     },
@@ -243,10 +242,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[3] === 0 && qtdForDayAndTime[4] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[1]}`
           : `
-          ( ${qtdForDayAndTime[3]} - Manhã )
-          ( ${qtdToCar[1].length} - P/ Carro Baixo )
-          ( ${qtdForDayAndTime[4]} - Tarde )
-          ( ${qtdForDayAndTime[5]} - Total )`
+          ( ${qtdForDayAndTime[3] / 4} - Manhã )
+          ( ${qtdToCar[1].length / 4} - Carro Baixo )
+          ( ${qtdForDayAndTime[4] / 4} - Tarde )
+          `
         }`,
       icon: 'folder_shared'
     },
@@ -256,10 +255,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[6] === 0 && qtdForDayAndTime[7] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[2]}`
           : `
-          ( ${qtdForDayAndTime[6]} - Manhã )
-          ( ${qtdToCar[2].length} - P/ Carro Baixo )
-          ( ${qtdForDayAndTime[7]} - Tarde )
-          ( ${qtdForDayAndTime[8]} - Total )`
+          ( ${qtdForDayAndTime[6] / 4} - Manhã )
+          ( ${qtdToCar[2].length / 4} - Carro Baixo )
+          ( ${qtdForDayAndTime[7] / 4} - Tarde )
+          `
         }`,
       icon: 'folder_shared'
     },
@@ -269,10 +268,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[9] === 0 && qtdForDayAndTime[10] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[3]}`
           : `
-          ( ${qtdForDayAndTime[9]} - Manhã )
-          ( ${qtdToCar[3].length} - P/ Carro Baixo )
-          ( ${qtdForDayAndTime[10]} - Tarde )
-          ( ${qtdForDayAndTime[11]} - Total )`
+          ( ${qtdForDayAndTime[9] / 4} - Manhã )
+          ( ${qtdToCar[3].length / 4} - Carro Baixo )
+          ( ${qtdForDayAndTime[10] / 4} - Tarde )
+          `
         }`,
       icon: 'folder_shared'
     },
@@ -282,10 +281,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[12] === 0 && qtdForDayAndTime[13] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[4]}`
           : `
-          ( ${qtdForDayAndTime[12]} - Manhã )
-          ( ${qtdToCar[4].length} - P/ Carro Baixo )
-          ( ${qtdForDayAndTime[13]} - Tarde )
-          ( ${qtdForDayAndTime[14]} - Total )`
+          ( ${qtdForDayAndTime[12] / 4} - Manhã )
+          ( ${qtdToCar[4].length / 4} - Carro Baixo )
+          ( ${qtdForDayAndTime[13] / 4} - Tarde )
+          `
         }`,
       icon: 'folder_shared'
     },
@@ -295,10 +294,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[15] === 0 && qtdForDayAndTime[16] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[5]}`
           : `
-          ( ${qtdForDayAndTime[15]} - Manhã )
-          ( ${qtdToCar[5].length} - P/ Carro Baixo )
-          ( ${qtdForDayAndTime[16]} - Tarde )
-          ( ${qtdForDayAndTime[17]} - Total )`
+          ( ${qtdForDayAndTime[15] / 4} - Manhã )
+          ( ${qtdToCar[5].length / 4} - Carro Baixo )
+          ( ${qtdForDayAndTime[16] / 4} - Tarde )
+          `
         }`,
       icon: 'folder_shared'
     },

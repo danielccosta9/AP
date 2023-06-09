@@ -40,8 +40,10 @@ const StatCards = () => {
 
   const [paciente, setPaciente] = useState([]);
   const [agendados, setAgendados] = useState([]);
+  const [agendadosAuto, setAgendadosAuto] = useState([]);
   const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
   const baseURLAgendados = "https://api-paciente.cyclic.app/agenda";
+  const baseURLAgendadosAuto = "https://api-paciente.cyclic.app/agendaauto";
 
 
   useEffect(() => {
@@ -54,6 +56,12 @@ const StatCards = () => {
       .then(json => setAgendados(json.data))
   }, [])
 
+  useEffect(() => {
+    Axios.get(baseURLAgendadosAuto)
+      .then(json => setAgendadosAuto(json.data))
+  }, [])
+
+  const agenda = agendados.concat(agendadosAuto)
 
   // Formatar a data
   function formatDate(date) {
@@ -80,27 +88,48 @@ const StatCards = () => {
   // Quantidade de pacientes agendados por dia
 
   const qtdForDay = [
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[0]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[1]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[2]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[3]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[4]
     }),
-    agendados.filter((item) => {
+    agenda.filter((item) => {
       return item.agenda_data === arrayOfWeek[5]
     }),
   ]
 
-  // Por dia - Manhã ou Tarde e Total
+  const qtdToCar = [
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[0] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[1] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[2] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[3] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[4] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[5] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
+    }),
+  ]
+
+  // Por dia: Manhã ou Tarde e Total
   const qtdForDayAndTime = [
     qtdForDay[0].filter((item) => {
       return item.agenda_saida < '11:00'
@@ -201,9 +230,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[0] === 0 && qtdForDayAndTime[1] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[0]}`
           : `
-          ( ${qtdForDayAndTime[0]} - Manhã )
-          ( ${qtdForDayAndTime[1]} - Tarde )
-          ( ${qtdForDayAndTime[2]} - Total )`
+          ( ${qtdForDayAndTime[0]} - Manhã)
+          (${qtdToCar[0].length} - P/ Carro Baixo )
+          (${qtdForDayAndTime[1]} - Tarde)
+          (${qtdForDayAndTime[2]} - Total)`
         }`,
       icon: 'folder_shared'
     },
@@ -214,6 +244,7 @@ const StatCards = () => {
           ? `Não há agendados para ${dayOfWeekInTextArray[1]}`
           : `
           ( ${qtdForDayAndTime[3]} - Manhã )
+          ( ${qtdToCar[1].length} - P/ Carro Baixo )
           ( ${qtdForDayAndTime[4]} - Tarde )
           ( ${qtdForDayAndTime[5]} - Total )`
         }`,
@@ -226,6 +257,7 @@ const StatCards = () => {
           ? `Não há agendados para ${dayOfWeekInTextArray[2]}`
           : `
           ( ${qtdForDayAndTime[6]} - Manhã )
+          ( ${qtdToCar[2].length} - P/ Carro Baixo )
           ( ${qtdForDayAndTime[7]} - Tarde )
           ( ${qtdForDayAndTime[8]} - Total )`
         }`,
@@ -238,6 +270,7 @@ const StatCards = () => {
           ? `Não há agendados para ${dayOfWeekInTextArray[3]}`
           : `
           ( ${qtdForDayAndTime[9]} - Manhã )
+          ( ${qtdToCar[3].length} - P/ Carro Baixo )
           ( ${qtdForDayAndTime[10]} - Tarde )
           ( ${qtdForDayAndTime[11]} - Total )`
         }`,
@@ -250,6 +283,7 @@ const StatCards = () => {
           ? `Não há agendados para ${dayOfWeekInTextArray[4]}`
           : `
           ( ${qtdForDayAndTime[12]} - Manhã )
+          ( ${qtdToCar[4].length} - P/ Carro Baixo )
           ( ${qtdForDayAndTime[13]} - Tarde )
           ( ${qtdForDayAndTime[14]} - Total )`
         }`,
@@ -262,6 +296,7 @@ const StatCards = () => {
           ? `Não há agendados para ${dayOfWeekInTextArray[5]}`
           : `
           ( ${qtdForDayAndTime[15]} - Manhã )
+          ( ${qtdToCar[5].length} - P/ Carro Baixo )
           ( ${qtdForDayAndTime[16]} - Tarde )
           ( ${qtdForDayAndTime[17]} - Total )`
         }`,
@@ -269,7 +304,7 @@ const StatCards = () => {
     },
     {
       name: 'Nº de Pacientes Agendados',
-      amount: agendados.length + ' - Pacientes',
+      amount: agenda.length + ' - Pacientes',
       icon: 'folder_shared'
     },
     {

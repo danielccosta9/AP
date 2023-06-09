@@ -321,9 +321,30 @@ const StatCards = () => {
           <StyledCard elevation={6}>
             <ContentBox>
               <Icon className="icon">{item.icon}</Icon>
-              <Box ml="12px">
-                <Small>{item.name}</Small>
-                <Heading>{item.amount}</Heading>
+              <Box ml="12px"
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
+                <Small
+                  sx={{
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    whiteSpace: '-moz-pre-wrap',
+                    alignItems: 'justify',
+                    marginBottom: '5px',
+                  }}
+                >{item.name}</Small>
+                <Heading
+                  sx={{
+                    fontSize: '15px',
+                    fontWeight: 'bold',
+                    whiteSpace: '-moz-pre-wrap',
+                    alignItems: 'justify',
+                  }}
+                >{item.amount}</Heading>
               </Box>
             </ContentBox>
           </StyledCard>

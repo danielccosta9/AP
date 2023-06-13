@@ -109,29 +109,29 @@ const StatCards = () => {
 
   const qtdToCar = [
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[0] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[0] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[1] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[1] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[2] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[2] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[3] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[3] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[4] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[4] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[5] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[5] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
   ]
 
   // Por dia: Manhã ou Tarde e Total
   const qtdForDayAndTime = [
     qtdForDay[0].filter((item) => {
-      return item.agenda_saida < '11:00' && item.agenda_carro === "NÃO"
+      return item.agenda_saida < '11:00'
     }).length,
     qtdForDay[0].filter((item) => {
       return item.agenda_saida >= '11:00'
@@ -141,7 +141,7 @@ const StatCards = () => {
     }).length,
 
     qtdForDay[1].filter((item) => {
-      return item.agenda_saida < '11:00' && item.agenda_carro === "NÃO"
+      return item.agenda_saida < '11:00'
     }).length,
     qtdForDay[1].filter((item) => {
       return item.agenda_saida >= '11:00'
@@ -151,7 +151,7 @@ const StatCards = () => {
     }).length,
 
     qtdForDay[2].filter((item) => {
-      return item.agenda_saida < '11:00' && item.agenda_carro === "NÃO"
+      return item.agenda_saida < '11:00'
     }).length,
     qtdForDay[2].filter((item) => {
       return item.agenda_saida >= '11:00'
@@ -161,7 +161,7 @@ const StatCards = () => {
     }).length,
 
     qtdForDay[3].filter((item) => {
-      return item.agenda_saida < '11:00' && item.agenda_carro === "NÃO"
+      return item.agenda_saida < '11:00'
     }).length,
     qtdForDay[3].filter((item) => {
       return item.agenda_saida >= '11:00'
@@ -171,7 +171,7 @@ const StatCards = () => {
     }).length,
 
     qtdForDay[4].filter((item) => {
-      return item.agenda_saida < '11:00' && item.agenda_carro === "NÃO"
+      return item.agenda_saida < '11:00'
     }).length,
     qtdForDay[4].filter((item) => {
       return item.agenda_saida >= '11:00'
@@ -181,7 +181,7 @@ const StatCards = () => {
     }).length,
 
     qtdForDay[5].filter((item) => {
-      return item.agenda_saida < '11:00' && item.agenda_carro === "NÃO"
+      return item.agenda_saida < '11:00'
     }).length,
     qtdForDay[5].filter((item) => {
       return item.agenda_saida >= '11:00'
@@ -229,9 +229,9 @@ const StatCards = () => {
         ${qtdForDayAndTime[0] === 0 && qtdForDayAndTime[1] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[0]}`
           : `
-          ( ${qtdForDayAndTime[0]} - Manhã)
-          (${qtdToCar[0].length} - Carro Baixo )
-          (${qtdForDayAndTime[1]} - Tarde)
+          ( ${qtdForDayAndTime[0] / 4} - Manhã)
+          (${qtdToCar[0].length / 4} - Carro Baixo )
+          (${qtdForDayAndTime[1] / 4} - Tarde)
           `
         }`,
       icon: 'folder_shared'

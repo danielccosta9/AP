@@ -109,22 +109,22 @@ const StatCards = () => {
 
   const qtdToCar = [
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[0] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[0] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[1] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[1] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[2] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[2] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[3] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[3] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[4] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[4] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
     agenda.filter((item) => {
-      return item.agenda_data === arrayOfWeek[5] && item.agenda_saida < '11:00' && item.agenda_carro !== "NÃO"
+      return item.agenda_data === arrayOfWeek[5] && item.agenda_saida < '11:00' && item.agenda_carro === "SIM"
     }),
   ]
 
@@ -229,7 +229,7 @@ const StatCards = () => {
         ${qtdForDayAndTime[0] === 0 && qtdForDayAndTime[1] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[0]}`
           : `
-          ( ${qtdForDayAndTime[0] / 4} - Manhã)
+          ( ${qtdForDayAndTime[0] / 4} - P/ Ônibus)
           (${qtdToCar[0].length / 4} - Carro Baixo )
           (${qtdForDayAndTime[1] / 4} - Tarde)
           `
@@ -242,7 +242,7 @@ const StatCards = () => {
         ${qtdForDayAndTime[3] === 0 && qtdForDayAndTime[4] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[1]}`
           : `
-          ( ${qtdForDayAndTime[3] / 4} - Manhã )
+          ( ${qtdForDayAndTime[3] / 4} - P/ Ônibus )
           ( ${qtdToCar[1].length / 4} - Carro Baixo )
           ( ${qtdForDayAndTime[4] / 4} - Tarde )
           `
@@ -255,7 +255,7 @@ const StatCards = () => {
         ${qtdForDayAndTime[6] === 0 && qtdForDayAndTime[7] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[2]}`
           : `
-          ( ${qtdForDayAndTime[6] / 4} - Manhã )
+          ( ${qtdForDayAndTime[6] / 4} - P/ Ônibus )
           ( ${qtdToCar[2].length / 4} - Carro Baixo )
           ( ${qtdForDayAndTime[7] / 4} - Tarde )
           `
@@ -268,7 +268,7 @@ const StatCards = () => {
         ${qtdForDayAndTime[9] === 0 && qtdForDayAndTime[10] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[3]}`
           : `
-          ( ${qtdForDayAndTime[9] / 4} - Manhã )
+          ( ${qtdForDayAndTime[9] / 4} - P/ Ônibus )
           ( ${qtdToCar[3].length / 4} - Carro Baixo )
           ( ${qtdForDayAndTime[10] / 4} - Tarde )
           `
@@ -281,7 +281,7 @@ const StatCards = () => {
         ${qtdForDayAndTime[12] === 0 && qtdForDayAndTime[13] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[4]}`
           : `
-          ( ${qtdForDayAndTime[12] / 4} - Manhã )
+          ( ${qtdForDayAndTime[12] / 4} - P/ Ônibus )
           ( ${qtdToCar[4].length / 4} - Carro Baixo )
           ( ${qtdForDayAndTime[13] / 4} - Tarde )
           `
@@ -294,7 +294,7 @@ const StatCards = () => {
         ${qtdForDayAndTime[15] === 0 && qtdForDayAndTime[16] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[5]}`
           : `
-          ( ${qtdForDayAndTime[15] / 4} - Manhã )
+          ( ${qtdForDayAndTime[15] / 4} - P/ Ônibus )
           ( ${qtdToCar[5].length / 4} - Carro Baixo )
           ( ${qtdForDayAndTime[16] / 4} - Tarde )
           `

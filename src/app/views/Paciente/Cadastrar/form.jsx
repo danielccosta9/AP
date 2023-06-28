@@ -51,7 +51,7 @@ const SimpleForm = () => {
         console.log(error);
       })
     setTimeout(() => {
-      window.location.reload();
+      window.location.assign("https://agendarpacientepma.netlify.app/")
     }, 1000);
   }
 

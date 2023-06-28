@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from "react";
+import { Navigate } from 'react-router-dom';
 import Axios from "axios";
 
 import suggestionsCar from './suggestionsCar';
@@ -79,7 +80,8 @@ const SimpleForm = () => {
     setTimeout(() => {
       window.confirm(
         "Agendamento cadastrado com sucesso!"
-      ); window.location.reload();
+      );<Navigate to="dashboard/default" />
+
     }, 1000);
   }
 

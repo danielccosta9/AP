@@ -338,7 +338,7 @@ const StatCards = () => {
                 >{item.name}</Small>
                 <Heading
                   sx={{
-                    fontSize: '15px',
+                    fontSize: '13px',
                     fontWeight: 'bold',
                     whiteSpace: '-moz-pre-wrap',
                     alignItems: 'justify',

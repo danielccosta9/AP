@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useState } from "react";
 import Axios from "axios";
+import * as Yup from 'yup';
 
 import suggestionsHouse from "./suggestionsHouse";
 import { InputCpf, InputDate, InputPhone } from "../../InputForms"
@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import { Span } from "../../../components/Typography";
+import { useFormik } from 'formik';
 
 
 const TextField = styled(TextValidator)(() => ({
@@ -36,125 +37,162 @@ const AutoComplete = styled(Autocomplete)(() => ({
 
 
 const SimpleForm = () => {
-  const baseURLPaciente = "https://api-paciente.cyclic.app/paciente";
-  const [values, setValues] = useState({});
 
-
-  function submit(event) {
-    event.preventDefault();
-    console.log(values);
-    Axios.post(baseURLPaciente, values)
-      .then(() => {
-        setValues({});
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    setTimeout(() => {
-      window.location.assign("https://agendarpacientepma.netlify.app/")
-    }, 1000);
-  }
+  const formik = useFormik({
+    initialValues: {
+      nome: '',
+      cpf: '',
+      nascimento: '',
+      telefone: '',
+      cormobidade: '',
+      residencia: '',
+    },
+    validationSchema: Yup.object({
+      nome: Yup
+        .string()
+        .required('Obrigatório')
+        .min(3, 'Mínimo de 3 caracteres')
+        .matches(/^[a-zA-ZÀ-ú ]*$/, 'Somente letras'),
+      cpf: Yup
+        .string()
+        .required('Obrigatório')
+        .min(14, 'Mínimo de 14 caracteres')
+        .matches(/^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$/, 'CPF inválido'),
+      nascimento: Yup
+        .string()
+        .required('Obrigatório'),
+      telefone: Yup
+        .string()
+        .required('Obrigatório')
+        .min(15, 'Mínimo de 15 caracteres'),
+      cormobidade: Yup
+        .string()
+        .required('Obrigatório'),
+      residencia: Yup
+        .string()
+        .required('Obrigatório'),
+    }),
+    onSubmit: async (values, helpers) => {
+      try {
+        await Axios.post('https://api-paciente.cyclic.app/paciente', values)
+        helpers.setStatus({ success: true })
+        helpers.resetForm()
+        alert('Paciente cadastrado com sucesso!')
+      } catch (error) {
+        helpers.setStatus({ success: false })
+        alert('Erro ao cadastrar paciente!')
+      }
+    },
+  })
 
   function handleChange(event) {
     const name = event.target.name;
     const value = event.target.value.toUpperCase();
-    setValues(values => ({ ...values, [name]: value }))
+    formik.setFieldValue(name, value);
   }
 
 
   return (
     <div>
-      <ValidatorForm onSubmit={(event) => submit(event)}>
-        <Grid container spacing={6}>
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+      <ValidatorForm onSubmit={formik.handleSubmit}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
             <TextField
-              required
-              id="nome"
               name="nome"
               label="Nome do Paciente"
-              fullWidth
-              value={values.nome || ""}
-              onChange={handleChange}
-              errorMessages={"Nome inválido"}
-              validators={["required", "minStringLength: 3", "maxStringLength: 100", "matchRegexp:^[a-zA-ZÀ-ú ]*$"]}
-            />
-            <TextField
-              required
-              type="text"
-              name="cormobidade"
-              id="standard-basic"
-              value={values.cormobidade || ""}
-              onChange={handleChange}
-              errorMessages={["Este campo é obrigatório"]}
-              label="Cormobidade"
-              validators={["required", "minStringLength: 3", "maxStringLength: 100"]}
-            />
-
-            <AutoComplete
-              options={suggestionsHouse}
-              getOptionLabel={(option) => option.label}
-              renderInput={(params) => (
-                <TextField {...params} label="Residencia" variant="outlined" required />
-              )}
-              onChange={(event, value) => setValues(values => ({ ...values, residencia: value.label }))}
+              variant="outlined"
+              value={formik.values.nome}
+              onChange={formik.handleChange && handleChange}
+              error={formik.touched.nome && Boolean(formik.errors.nome)}
+              helperText={formik.touched.nome && formik.errors.nome}
             />
           </Grid>
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
+          <Grid item xs={12} sm={6}>
             <TextField
-              sx={{ width: '30ch' }}
-              required
-              id="cpf"
-              name="cpf"
               label="CPF"
-              fullWidth
-              onChange={handleChange}
-              value={values.cpf || ''}
-              validators={["required", "minStringLength: 14", "maxStringLength: 14", "matchRegexp:^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$"]}
-              errorMessages={"CPF inválido"}
+              variant="outlined"
+              name="cpf"
+              value={formik.values.cpf}
+              onChange={formik.handleChange}
+              error={formik.touched.cpf && Boolean(formik.errors.cpf)}
+              helperText={formik.touched.cpf && formik.errors.cpf}
               InputProps={{
                 inputComponent: InputCpf,
               }}
             />
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <TextField
-              sx={{ width: '30ch' }}
-              required
               label="Data de Nascimento"
+              variant="outlined"
               name="nascimento"
-              value={values.nascimento || ""}
+              value={formik.values.nascimento}
+              onChange={formik.handleChange}
+              error={formik.touched.nascimento && Boolean(formik.errors.nascimento)}
+              helperText={formik.touched.nascimento && formik.errors.nascimento}
               InputProps={{
                 inputComponent: InputDate,
               }}
-              onChange={handleChange}
-              errorMessages={["Este campo é obrigatório"]}
-              validators={["required"]}
-              id="formatted-text-mask-input"
             />
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <TextField
-              sx={{ width: '30ch' }}
-              required
-              id="telefone"
-              name="telefone"
               label="Telefone"
-              fullWidth
-              onChange={handleChange}
-              value={values.telefone || ''}
-              validators={["required", "minStringLength: 15", "maxStringLength: 15"]}
-              errorMessages={"Telefone inválido"}
+              variant="outlined"
+              name="telefone"
+              value={formik.values.telefone}
+              onChange={formik.handleChange}
+              error={formik.touched.telefone && Boolean(formik.errors.telefone)}
+              helperText={formik.touched.telefone && formik.errors.telefone}
               InputProps={{
                 inputComponent: InputPhone,
               }}
             />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Comorbidade"
+              variant="outlined"
+              name="cormobidade"
+              value={formik.values.cormobidade}
+              onChange={formik.handleChange && handleChange}
+              error={formik.touched.cormobidade && Boolean(formik.errors.cormobidade)}
+              helperText={formik.touched.cormobidade && formik.errors.cormobidade}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AutoComplete
+              options={suggestionsHouse}
+              getOptionLabel={(option) => option.label}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Residência"
+                  variant="outlined"
+                  name="residencia"
+                  value={formik.values.residencia}
+                />
+              )}
+
+              onChange={(event, value) => {
+                formik.setFieldValue('residencia', value?.label || '')
+              }}
+              error={formik.touched.residencia && Boolean(formik.errors.residencia)}
+              helperText={formik.touched.residencia && formik.errors.residencia}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              style={button}
+              endIcon={<Icon>send</Icon>}
+            >
+              <Span>Enviar</Span>
+            </Button>
+          </Grid>
         </Grid>
-        <Button
-          color="primary"
-          variant="contained"
-          type="submit"
-          style={button}
-        >
-          <Icon>save</Icon>
-          <Span sx={{ pl: 1, textTransform: "capitalize" }}>Salvar</Span>
-        </Button>
       </ValidatorForm>
     </div >
   );

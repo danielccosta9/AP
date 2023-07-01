@@ -1,10 +1,7 @@
 import * as React from 'react';
 import Axios from "axios";
 import * as Yup from 'yup';
-
-import suggestionsHouse from "./suggestionsHouse";
-import { InputCpf, InputDate, InputPhone } from "../../InputForms"
-
+import { useFormik } from 'formik';
 import {
   Autocomplete,
   Button,
@@ -12,10 +9,18 @@ import {
   Icon,
   styled,
 } from "@mui/material";
-import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import { Span } from "../../../components/Typography";
-import { useFormik } from 'formik';
+import {
+  TextValidator,
+  ValidatorForm
+} from "react-material-ui-form-validator";
 
+import {
+  InputCpf,
+  InputDate,
+  InputPhone
+} from "../../InputForms"
+import suggestionsHouse from "./suggestionsHouse";
+import { Span } from "../../../components/Typography";
 
 const TextField = styled(TextValidator)(() => ({
   width: "100%",
@@ -33,7 +38,6 @@ const button = {
 const AutoComplete = styled(Autocomplete)(() => ({
   marginBottom: '16px',
 }));
-
 
 
 const SimpleForm = () => {
@@ -187,9 +191,9 @@ const SimpleForm = () => {
               color="primary"
               type="submit"
               style={button}
-              endIcon={<Icon>send</Icon>}
+              endIcon={<Icon>save</Icon>}
             >
-              <Span>Enviar</Span>
+              <Span>Cadastrar</Span>
             </Button>
           </Grid>
         </Grid>

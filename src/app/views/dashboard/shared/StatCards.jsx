@@ -314,13 +314,13 @@ const StatCards = () => {
   ];
 
   return (
-    <Grid container spacing={3} sx={{ mb: '24px' }}>
+    <Grid container spacing={4} sx={{ mb: '24px' }}>
       {cardList.map((item, index) => (
         <Grid item xs={12} md={6} key={index}>
           <StyledCard elevation={6}>
             <ContentBox>
               <Icon className="icon">{item.icon}</Icon>
-              <Box ml="12px"
+              <Box ml="16px"
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -329,7 +329,7 @@ const StatCards = () => {
               >
                 <Small
                   sx={{
-                    fontSize: '12px',
+                    fontSize: '14px',
                     fontWeight: 'bold',
                     whiteSpace: '-moz-pre-wrap',
                     alignItems: 'justify',
@@ -338,7 +338,7 @@ const StatCards = () => {
                 >{item.name}</Small>
                 <Heading
                   sx={{
-                    fontSize: '13px',
+                    fontSize: '16px',
                     fontWeight: 'bold',
                     whiteSpace: '-moz-pre-wrap',
                     alignItems: 'justify',

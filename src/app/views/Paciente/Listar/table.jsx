@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import Axios from 'axios';
 import { useState, useEffect, useMemo } from "react";
 

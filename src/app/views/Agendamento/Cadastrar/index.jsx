@@ -21,7 +21,7 @@ const AppForm = () => {
       </Box>
 
       <Stack spacing={3}>
-        <SimpleCard title="Cadastrar Agendamento">
+        <SimpleCard title="Agendar Paciente">
           <SimpleForm />
         </SimpleCard>
 

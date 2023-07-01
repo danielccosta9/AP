@@ -52,8 +52,6 @@ const PaginationTable = () => {
             })
     };
 
-
-
     const handleChangePage = (_, newPage) => {
         setPage(newPage);
     };

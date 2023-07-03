@@ -105,6 +105,7 @@ const SimpleForm = () => {
         helpers.setStatus({ success: true })
         helpers.resetForm();
         alert('Agendamento cadastrado com sucesso!');
+        window.location.assign("https://agendarpacientepma.netlify.app/")
       } catch (error) {
         alert('Erro ao cadastrar agendamento!');
       }

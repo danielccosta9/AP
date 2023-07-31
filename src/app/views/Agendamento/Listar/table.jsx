@@ -65,7 +65,10 @@ const PaginationTable = () => {
     const agenda = useMemo(() => {
         setIsLoading(true);
         let agendaFiltrada = agendados.filter((agendado) => {
-            return agendado.paciente_nome.toLowerCase().includes(busca.toLowerCase())
+            return (
+                agendado.paciente_nome.toLowerCase().includes(busca.toLowerCase()) ||
+                agendado.agenda_data.toLowerCase().includes(busca.toLowerCase())
+            )
         })
         setIsLoading(false);
         return agendaFiltrada;

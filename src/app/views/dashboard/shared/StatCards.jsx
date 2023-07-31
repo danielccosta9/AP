@@ -128,6 +128,48 @@ const StatCards = () => {
     }),
   ]
 
+  const qtdToDuca = [
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[0] && item.agenda_saida < '11:00' && item.agenda_carro === "DUCA"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[1] && item.agenda_saida < '11:00' && item.agenda_carro === "DUCA"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[2] && item.agenda_saida < '11:00' && item.agenda_carro === "DUCA"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[3] && item.agenda_saida < '11:00' && item.agenda_carro === "DUCA"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[4] && item.agenda_saida < '11:00' && item.agenda_carro === "DUCA"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[5] && item.agenda_saida < '11:00' && item.agenda_carro === "DUCA"
+    }),
+  ]
+
+  const qtdToEsp = [
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[0] && item.agenda_saida < '11:00' && item.agenda_carro === "ESP"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[1] && item.agenda_saida < '11:00' && item.agenda_carro === "ESP"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[2] && item.agenda_saida < '11:00' && item.agenda_carro === "ESP"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[3] && item.agenda_saida < '11:00' && item.agenda_carro === "ESP"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[4] && item.agenda_saida < '11:00' && item.agenda_carro === "ESP"
+    }),
+    agenda.filter((item) => {
+      return item.agenda_data === arrayOfWeek[5] && item.agenda_saida < '11:00' && item.agenda_carro === "ESP"
+    }),
+  ]
+
   // Por dia: Manhã ou Tarde e Total
   const qtdForDayAndTime = [
     qtdForDay[0].filter((item) => {
@@ -229,9 +271,11 @@ const StatCards = () => {
         ${qtdForDayAndTime[0] === 0 && qtdForDayAndTime[1] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[0]}`
           : `
-          ( ${qtdForDayAndTime[0] / 4} - P/ Ônibus)
-          (${qtdToCar[0].length / 4} - Carro Baixo )
-          (${qtdForDayAndTime[1] / 4} - Tarde)
+          ( ${qtdForDayAndTime[0]} - Pessoas P/ Ônibus )
+          ( ${qtdToCar[0].length / 4} - Carro Baixo )
+          ( ${qtdToDuca[0].length / 4} - Duca )
+          ( ${qtdToEsp[0].length / 4} - Esp )
+          ( ${qtdForDayAndTime[1] / 4} - Tarde )
           `
         }`,
       icon: 'folder_shared'
@@ -242,8 +286,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[3] === 0 && qtdForDayAndTime[4] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[1]}`
           : `
-          ( ${qtdForDayAndTime[3] / 4} - P/ Ônibus )
+          ( ${qtdForDayAndTime[3]} - Pessoas P/ Ônibus )
           ( ${qtdToCar[1].length / 4} - Carro Baixo )
+          ( ${qtdToDuca[1].length / 4} - Duca )
+          ( ${qtdToEsp[1].length / 4} - Esp )
           ( ${qtdForDayAndTime[4] / 4} - Tarde )
           `
         }`,
@@ -255,8 +301,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[6] === 0 && qtdForDayAndTime[7] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[2]}`
           : `
-          ( ${qtdForDayAndTime[6] / 4} - P/ Ônibus )
+          ( ${qtdForDayAndTime[6]} - Pessoas P/ Ônibus )
           ( ${qtdToCar[2].length / 4} - Carro Baixo )
+          ( ${qtdToDuca[2].length / 4} - Duca )
+          ( ${qtdToEsp[2].length / 4} - Esp )
           ( ${qtdForDayAndTime[7] / 4} - Tarde )
           `
         }`,
@@ -268,8 +316,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[9] === 0 && qtdForDayAndTime[10] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[3]}`
           : `
-          ( ${qtdForDayAndTime[9] / 4} - P/ Ônibus )
+          ( ${qtdForDayAndTime[9]} - Pessoas P/ Ônibus )
           ( ${qtdToCar[3].length / 4} - Carro Baixo )
+          ( ${qtdToDuca[3].length / 4} - Duca )
+          ( ${qtdToEsp[3].length / 4} - Esp )
           ( ${qtdForDayAndTime[10] / 4} - Tarde )
           `
         }`,
@@ -281,8 +331,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[12] === 0 && qtdForDayAndTime[13] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[4]}`
           : `
-          ( ${qtdForDayAndTime[12] / 4} - P/ Ônibus )
+          ( ${qtdForDayAndTime[12]} - Pessoas P/ Ônibus )
           ( ${qtdToCar[4].length / 4} - Carro Baixo )
+          ( ${qtdToDuca[4].length / 4} - Duca )
+          ( ${qtdToEsp[4].length / 4} - Esp )
           ( ${qtdForDayAndTime[13] / 4} - Tarde )
           `
         }`,
@@ -294,8 +346,10 @@ const StatCards = () => {
         ${qtdForDayAndTime[15] === 0 && qtdForDayAndTime[16] === 0
           ? `Não há agendados para ${dayOfWeekInTextArray[5]}`
           : `
-          ( ${qtdForDayAndTime[15] / 4} - P/ Ônibus )
+          ( ${qtdForDayAndTime[15]} - Pessoas P/ Ônibus )
           ( ${qtdToCar[5].length / 4} - Carro Baixo )
+          ( ${qtdToDuca[5].length / 4} - Duca )
+          ( ${qtdToEsp[5].length / 4} - Esp )
           ( ${qtdForDayAndTime[16] / 4} - Tarde )
           `
         }`,
@@ -325,6 +379,7 @@ const StatCards = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
+                  alignItems: 'flex-start',
                 }}
               >
                 <Small
@@ -338,7 +393,7 @@ const StatCards = () => {
                 >{item.name}</Small>
                 <Heading
                   sx={{
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: 'bold',
                     whiteSpace: '-moz-pre-wrap',
                     alignItems: 'justify',

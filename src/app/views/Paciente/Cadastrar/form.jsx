@@ -3,7 +3,6 @@ import Axios from "axios";
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import {
-  Autocomplete,
   Button,
   Grid,
   Icon,
@@ -19,7 +18,6 @@ import {
   InputDate,
   InputPhone
 } from "../../InputForms"
-import suggestionsHouse from "./suggestionsHouse";
 import { Span } from "../../../components/Typography";
 
 const TextField = styled(TextValidator)(() => ({
@@ -34,10 +32,6 @@ const button = {
   width: '200px',
   borderRadius: '15px',
 };
-
-const AutoComplete = styled(Autocomplete)(() => ({
-  marginBottom: '16px',
-}));
 
 
 const SimpleForm = () => {
@@ -155,36 +149,28 @@ const SimpleForm = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              label="Comorbidade"
-              variant="outlined"
-              name="cormobidade"
-              value={formik.values.cormobidade}
-              onChange={formik.handleChange && handleChange}
-              error={formik.touched.cormobidade && Boolean(formik.errors.cormobidade)}
-              helperText={formik.touched.cormobidade && formik.errors.cormobidade}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <AutoComplete
-              options={suggestionsHouse}
-              getOptionLabel={(option) => option.label}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Residência"
-                  variant="outlined"
-                  name="residencia"
-                  value={formik.values.residencia}
-                />
-              )}
-
-              onChange={(event, value) => {
-                formik.setFieldValue('residencia', value?.label || '')
-              }}
-              error={formik.touched.residencia && Boolean(formik.errors.residencia)}
-              helperText={formik.touched.residencia && formik.errors.residencia}
-            />
+            <Grid item lg={4} md={4} sm={12} xs={12}>
+              <Span
+                name="cormobidade"
+                onChange={formik.handleChange}
+                type="number"
+                variant="outlined"
+                value={formik.values.cormobidade || 'SEM COMORBIDADE'}
+                valueDefault={formik.values.cormobidade = 'SEM COMORBIDADE'}
+                disabled={true}
+              >
+              </Span>
+              <Span
+                name="residencia"
+                onChange={formik.handleChange}
+                type="number"
+                variant="outlined"
+                value={formik.values.residencia || 'CENTRO'}
+                valueDefault={formik.values.residencia = 'CENTRO'}
+                disabled={true}
+              >
+              </Span>
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button

@@ -3,7 +3,6 @@ const suggestionsCar = [
     { label: 'SIM' },
     { label: 'ESP' },
     { label: 'DUCA' },
-    { label: 'NEIDE' },
 ];
 
 export default suggestionsCar;

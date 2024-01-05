@@ -77,7 +77,7 @@ const PaginationTable = () => {
     return (
         <>
             {isLoading && (
-                <Box sx={{ width: '100%' }}>
+                <Box sx={{ width: '90%' }}>
                     <LinearProgress />
                 </Box>
             ) || (
